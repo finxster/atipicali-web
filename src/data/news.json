@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Welcome to AtipicALI",
+    "date": "2025-01-15",
+    "excerpt": "We're excited to launch AtipicALI, a platform dedicated to helping the neurodivergent community find inclusive and accessible services.",
+    "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 2,
+    "title": "New Features Coming Soon",
+    "date": "2025-01-20",
+    "excerpt": "We're working on exciting new features including advanced search filters, user reviews, and community forums.",
+    "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": 3,
+    "title": "Community Spotlight",
+    "date": "2025-01-25",
+    "excerpt": "Meet our featured community members who are making a difference in creating more inclusive spaces.",
+    "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80"
+  }
+]

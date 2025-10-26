@@ -1,0 +1,66 @@
+{
+  "navbar": {
+    "title": "AtipicALI",
+    "register": "Register",
+    "login": "Login",
+    "search": "Search",
+    "serviceType": "Service type",
+    "location": "Location"
+  },
+  "hero": {
+    "title": "Discover Neurodivergent-Friendly Places",
+    "description": "AtipicALI is your trusted directory for finding inclusive services and spaces tailored to the neurodivergent community.",
+    "searchPlaces": "Search Places",
+    "addPlace": "Add a New Place"
+  },
+  "news": {
+    "title": "Latest News",
+    "readMore": "Read more"
+  },
+  "recentPlaces": {
+    "title": "Recently Added Places",
+    "loading": "Loading places...",
+    "error": "Failed to load places. Please try again later.",
+    "viewDetails": "View Details"
+  },
+  "cta": {
+    "title": "Join Our Community",
+    "description": "Help others by sharing neurodivergent-friendly places you know and love.",
+    "addPlace": "Add a New Place"
+  },
+  "footer": {
+    "about": "About AtipicALI",
+    "contact": "Contact",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "© 2025 AtipicALI. All rights reserved."
+  },
+  "addPlace": {
+    "title": "Add a New Place",
+    "description": "Share a neurodivergent-friendly place with our community.",
+    "placeName": "Place Name",
+    "placeType": "Type of Service",
+    "address": "Address",
+    "city": "City",
+    "description": "Description",
+    "submit": "Submit Place"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login",
+    "noAccount": "Don't have an account?",
+    "register": "Register here"
+  },
+  "register": {
+    "title": "Register",
+    "name": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "submit": "Register",
+    "hasAccount": "Already have an account?",
+    "login": "Login here"
+  }
+}

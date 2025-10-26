@@ -1,0 +1,66 @@
+{
+  "navbar": {
+    "title": "AtipicALI",
+    "register": "Registrar",
+    "login": "Entrar",
+    "search": "Buscar",
+    "serviceType": "Tipo de serviço",
+    "location": "Localização"
+  },
+  "hero": {
+    "title": "Descubra Lugares Amigáveis para Neurodivergentes",
+    "description": "AtipicALI é seu diretório confiável para encontrar serviços e espaços inclusivos adaptados à comunidade neurodivergente.",
+    "searchPlaces": "Buscar Lugares",
+    "addPlace": "Adicionar Novo Lugar"
+  },
+  "news": {
+    "title": "Novidades",
+    "readMore": "Leia mais"
+  },
+  "recentPlaces": {
+    "title": "Lugares Adicionados Recentemente",
+    "loading": "Carregando lugares...",
+    "error": "Falha ao carregar lugares. Por favor, tente novamente mais tarde.",
+    "viewDetails": "Ver Detalhes"
+  },
+  "cta": {
+    "title": "Junte-se à Nossa Comunidade",
+    "description": "Ajude outras pessoas compartilhando lugares amigáveis para neurodivergentes que você conhece e ama.",
+    "addPlace": "Adicionar Novo Lugar"
+  },
+  "footer": {
+    "about": "Sobre AtipicALI",
+    "contact": "Contato",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço",
+    "copyright": "© 2025 AtipicALI. Todos os direitos reservados."
+  },
+  "addPlace": {
+    "title": "Adicionar Novo Lugar",
+    "description": "Compartilhe um lugar amigável para neurodivergentes com nossa comunidade.",
+    "placeName": "Nome do Lugar",
+    "placeType": "Tipo de Serviço",
+    "address": "Endereço",
+    "city": "Cidade",
+    "description": "Descrição",
+    "submit": "Enviar Lugar"
+  },
+  "login": {
+    "title": "Entrar",
+    "email": "E-mail",
+    "password": "Senha",
+    "submit": "Entrar",
+    "noAccount": "Não tem uma conta?",
+    "register": "Registre-se aqui"
+  },
+  "register": {
+    "title": "Registrar",
+    "name": "Nome Completo",
+    "email": "E-mail",
+    "password": "Senha",
+    "confirmPassword": "Confirmar Senha",
+    "submit": "Registrar",
+    "hasAccount": "Já tem uma conta?",
+    "login": "Entre aqui"
+  }
+}
