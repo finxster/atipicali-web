@@ -14,8 +14,10 @@
     "addPlace": "Add a New Place"
   },
   "news": {
-    "title": "Latest News",
-    "readMore": "Read more"
+  "title": "Latest News",
+  "readMore": "Read more",
+  "loading": "Loading news...",
+  "error": "Failed to fetch news. Please try again later."
   },
   "recentPlaces": {
     "title": "Recently Added Places",

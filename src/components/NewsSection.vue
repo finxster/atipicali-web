@@ -4,7 +4,14 @@
       <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
         {{ $t('news.title') }}
       </h2>
-      <div class="grid md:grid-cols-3 gap-8">
+      <div v-if="loading" class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-atipicali-blue"></div>
+        <p class="mt-4 text-gray-600">{{ $t('news.loading') }}</p>
+      </div>
+      <div v-else-if="error" class="text-center py-12">
+        <p class="text-red-500 text-lg">{{ $t('news.error') }}</p>
+      </div>
+      <div v-else class="grid md:grid-cols-3 gap-8">
         <div 
           v-for="item in newsItems" 
           :key="item.id"
@@ -30,8 +37,31 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import newsData from '../data/news.json'
+import { ref, onMounted } from 'vue'
+import api from '../utils/axios'
 
-const newsItems = ref(newsData)
+const newsItems = ref([])
+const loading = ref(true)
+const error = ref(false)
+
+onMounted(async () => {
+  loading.value = true
+  error.value = false
+  try {
+    const { data } = await api.get('/api/public/news')
+    newsItems.value = data.map(item => ({
+      id: item.id,
+      title: item.title,
+      date: new Date(item.createdAt).toLocaleDateString(),
+      excerpt: item.summary,
+      image: item.image || 'https://via.placeholder.com/400x200?text=News',
+    }))
+  } catch (e) {
+    console.error('Error fetching news:', e)
+    error.value = true
+    newsItems.value = []
+  } finally {
+    loading.value = false
+  }
+})
 </script>

@@ -15,7 +15,9 @@
   },
   "news": {
     "title": "Novidades",
-    "readMore": "Leia mais"
+    "readMore": "Leia mais",
+    "loading": "Carregando notícias...",
+    "error": "Falha ao carregar notícias. Por favor, tente novamente mais tarde."
   },
   "recentPlaces": {
     "title": "Lugares Adicionados Recentemente",

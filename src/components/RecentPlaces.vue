@@ -27,7 +27,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import api from '../services/api'
+import api from '../utils/axios'
 import PlaceCard from './PlaceCard.vue'
 
 const places = ref([])
