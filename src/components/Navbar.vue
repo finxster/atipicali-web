@@ -3,9 +3,7 @@
     <div class="container mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
         <router-link to="/" class="flex items-center space-x-3">
-          <div class="w-10 h-10 bg-gradient-to-br from-atipicali-blue to-atipicali-green rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-xl">A</span>
-          </div>
+          <img src="@/assets/logo.png" alt="Logo" class="w-10 h-10 object-contain bg-white" />
           <span class="text-2xl font-bold text-atipicali-blue">{{ $t('navbar.title') }}</span>
         </router-link>
 
