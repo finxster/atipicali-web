@@ -5,9 +5,16 @@
         {{ $t('recentPlaces.title') }}
       </h2>
 
-      <div v-if="loading" class="text-center py-12">
-        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-atipicali-blue"></div>
-        <p class="mt-4 text-gray-600">{{ $t('recentPlaces.loading') }}</p>
+      <div v-if="loading" class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div v-for="n in 4" :key="n" class="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+          <div class="w-full h-48 bg-gray-200"></div>
+          <div class="p-6">
+            <div class="h-4 w-1/3 bg-gray-200 mb-2 rounded"></div>
+            <div class="h-6 w-2/3 bg-gray-200 mb-3 rounded"></div>
+            <div class="h-4 w-full bg-gray-200 mb-4 rounded"></div>
+            <div class="h-4 w-24 bg-gray-200 rounded"></div>
+          </div>
+        </div>
       </div>
 
       <div v-else-if="error" class="text-center py-12">
