@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="container mx-auto px-4 py-12">
       <div class="max-w-4xl mx-auto">
         <img 
@@ -46,7 +45,6 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 
 const route = useRoute()

@@ -5,7 +5,8 @@
     "login": "Entrar",
     "search": "Buscar",
     "serviceType": "Tipo de serviço",
-    "location": "Localização"
+    "location": "Localização",
+    "news": "Notícias"
   },
   "hero": {
     "title": "Descubra Lugares Amigáveis para Neurodivergentes",
@@ -18,6 +19,24 @@
     "readMore": "Leia mais",
     "loading": "Carregando notícias...",
     "error": "Falha ao carregar notícias. Por favor, tente novamente mais tarde."
+  },
+  "newsPage": {
+    "title": "Notícias & Blog",
+    "subtitle": "Mantenha-se atualizado com as últimas notícias e insights da comunidade AtipicALI",
+    "readMore": "Ler Artigo",
+    "previousArticle": "Artigo Anterior",
+    "nextArticle": "Próximo Artigo",
+    "backToList": "Voltar para Lista",
+    "previous": "Anterior",
+    "next": "Próximo",
+    "error": "Falha ao carregar notícias. Por favor, tente novamente mais tarde.",
+    "retry": "Tentar Novamente",
+    "allArticles": "Todos os Artigos",
+    "articlesCount": "artigos",
+    "noArticles": "Nenhum artigo disponível",
+    "author": "Autor",
+    "published": "Publicado",
+    "readingTime": "Tempo de leitura"
   },
   "recentPlaces": {
     "title": "Lugares Adicionados Recentemente",

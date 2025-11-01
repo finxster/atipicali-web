@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Navbar />
-
   <!-- Render the AddPlace form inline inside the page -->
   <div class="py-8">
     <AddPlaceForm :showCloseButton="false" @success="onSuccess" @cancel="onClose" />
@@ -13,7 +11,6 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import AddPlaceForm from './AddPlaceForm.vue'
 

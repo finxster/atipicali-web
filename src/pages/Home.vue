@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <Hero />
     <NewsSection />
     <RecentPlaces />
@@ -10,7 +9,6 @@
 </template>
 
 <script setup>
-import Navbar from '../components/Navbar.vue'
 import Hero from '../components/Hero.vue'
 import NewsSection from '../components/NewsSection.vue'
 import RecentPlaces from '../components/RecentPlaces.vue'

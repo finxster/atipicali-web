@@ -5,7 +5,8 @@
     "login": "Login",
     "search": "Search",
     "serviceType": "Service type",
-    "location": "Location"
+    "location": "Location",
+    "news": "News"
   },
   "hero": {
     "title": "Discover Neurodivergent-Friendly Places",
@@ -14,10 +15,28 @@
     "addPlace": "Add a New Place"
   },
   "news": {
-  "title": "Latest News",
-  "readMore": "Read more",
-  "loading": "Loading news...",
-  "error": "Failed to fetch news. Please try again later."
+    "title": "Latest News",
+    "readMore": "Read more",
+    "loading": "Loading news...",
+    "error": "Failed to fetch news. Please try again later."
+  },
+  "newsPage": {
+    "title": "News & Blog",
+    "subtitle": "Stay updated with the latest news and insights from the AtipicALI community",
+    "readMore": "Read Article",
+    "previousArticle": "Previous Article",
+    "nextArticle": "Next Article",
+    "backToList": "Back to List",
+    "previous": "Previous",
+    "next": "Next",
+    "error": "Failed to fetch news. Please try again later.",
+    "retry": "Try Again",
+    "allArticles": "All Articles",
+    "articlesCount": "articles",
+    "noArticles": "No articles available",
+    "author": "Author",
+    "published": "Published",
+    "readingTime": "Reading time"
   },
   "recentPlaces": {
     "title": "Recently Added Places",

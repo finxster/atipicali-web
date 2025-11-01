@@ -33,7 +33,10 @@
             <p class="text-sm text-gray-500 mb-2">{{ item.date }}</p>
             <h3 class="text-xl font-semibold mb-3 text-gray-800">{{ item.title }}</h3>
             <p class="text-gray-600 mb-4">{{ item.excerpt }}</p>
-            <a href="#" class="text-atipicali-blue hover:text-atipicali-blue-dark font-semibold">
+            <a 
+              @click="navigateToArticle(item.id)"
+              class="text-atipicali-blue hover:text-atipicali-blue-dark font-semibold cursor-pointer"
+            >
               {{ $t('news.readMore') }} →
             </a>
           </div>
@@ -45,17 +48,26 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import api from '../utils/axios'
 
+const router = useRouter()
 const newsItems = ref([])
 const loading = ref(true)
 const error = ref(false)
+
+const navigateToArticle = (articleId) => {
+  router.push({
+    name: 'NewsPage',
+    query: { articleId }
+  })
+}
 
 onMounted(async () => {
   loading.value = true
   error.value = false
   try {
-    const { data } = await api.get('/api/public/news')
+    const { data } = await api.get('/api/public/news/recent')
     newsItems.value = data.map((item, idx) => ({
       id: item.id,
       title: item.title,

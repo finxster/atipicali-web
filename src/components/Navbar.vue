@@ -24,6 +24,9 @@
         </div>
 
         <div class="flex items-center space-x-4">
+          <router-link to="/news" class="hidden sm:block text-gray-700 hover:text-atipicali-blue font-semibold transition-colors">
+            {{ $t('navbar.news') }}
+          </router-link>
           <div class="flex items-center space-x-2 border-r pr-4">
             <button 
               @click="changeLocale('en')"

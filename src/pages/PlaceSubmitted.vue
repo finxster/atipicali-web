@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
 
     <div class="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12 px-4">
       <div class="max-w-2xl mx-auto">
@@ -148,7 +147,6 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
-import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 
 const route = useRoute()

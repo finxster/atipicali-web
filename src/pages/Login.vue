@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="container mx-auto px-4 py-12">
       <div class="max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
         <h1 class="text-3xl font-bold mb-6 text-center">{{ $t('login.title') }}</h1>
@@ -68,7 +67,6 @@ import { useAuthStore } from '../stores/auth'
 import { useRouter, useRoute } from 'vue-router'
 import { ref } from 'vue'
 import Footer from '../components/Footer.vue'
-import Navbar from '../components/Navbar.vue'
 import api from '../utils/axios'
 
 const router = useRouter()
