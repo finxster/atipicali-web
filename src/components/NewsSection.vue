@@ -56,12 +56,18 @@ onMounted(async () => {
   error.value = false
   try {
     const { data } = await api.get('/api/public/news')
-    newsItems.value = data.map(item => ({
+    newsItems.value = data.map((item, idx) => ({
       id: item.id,
       title: item.title,
       date: new Date(item.createdAt).toLocaleDateString(),
       excerpt: item.summary,
-      image: item.image || 'https://via.placeholder.com/400x200?text=News',
+      image:
+        item.image ||
+        (idx === 1
+          ? new URL('@/assets/news_add_place.png', import.meta.url).href
+          : idx === 0
+          ? new URL('@/assets/news_add_review.png', import.meta.url).href
+          : 'https://via.placeholder.com/400x200?text=News'),
     }))
   } catch (e) {
     console.error('Error fetching news:', e)

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home.vue'
 import PlacePage from '../pages/PlacePage.vue'
 import AddPlace from '../pages/AddPlace.vue'
+import PlaceSubmitted from '../pages/PlaceSubmitted.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 
@@ -20,6 +21,11 @@ const routes = [
     path: '/add-place',
     name: 'AddPlace',
     component: AddPlace
+  },
+  {
+    path: '/place-submitted/:id',
+    name: 'PlaceSubmitted',
+    component: PlaceSubmitted
   },
   {
     path: '/login',
@@ -42,6 +48,19 @@ const router = createRouter({
     } else {
       return { top: 0 }
     }
+  }
+})
+
+// Navigation guard: protect routes that require authentication
+router.beforeEach((to, from, next) => {
+  // For now use the persisted token in localStorage as the auth signal
+  const token = localStorage.getItem('atipicali_token')
+  const requiresAuth = to.name === 'AddPlace'
+  if (requiresAuth && !token) {
+    // redirect to login and keep the intended route in the query
+    next({ name: 'Login', query: { redirect: to.fullPath } })
+  } else {
+    next()
   }
 })
 

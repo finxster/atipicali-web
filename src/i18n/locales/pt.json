@@ -25,6 +25,57 @@
     "error": "Falha ao carregar lugares. Por favor, tente novamente mais tarde.",
     "viewDetails": "Ver Detalhes"
   },
+  "places": {
+    "addPlace": {
+      "title": "Adicionar Novo Lugar",
+      "subtitle": "Compartilhe um lugar amigável para neurodivergentes com a comunidade.",
+      "name": "Nome do Lugar",
+      "namePlaceholder": "Ex: Café Aconchegante",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Descreva brevemente o lugar e características de acessibilidade",
+      "locationInfo": "Localização & Endereço",
+      "locationHelp": "Comece a digitar um endereço e selecione nas sugestões. Isso é usado para posicionar o marcador no mapa.",
+      "address": "Endereço",
+      "addressPlaceholder": "Rua, número, bairro",
+      "openMap": "Abrir no mapa",
+      "comment": "Comentário",
+      "optional": "Opcional",
+      "commentPlaceholder": "Observações adicionais (horário de silêncio, dicas sensoriais, etc.)",
+      "imageUrl": "URL da imagem",
+      "imageUrlPlaceholder": "Cole a URL de uma imagem (jpg, png)",
+      "imagePreview": "Pré-visualização da imagem",
+      "imageLoadError": "Falha ao carregar a imagem a partir da URL fornecida.",
+      "rating": "Avaliação de Acessibilidade",
+      "contactInfo": "Contato (telefone)",
+      "contactInfoPlaceholder": "Ex: +55 11 99999-9999",
+      "contactInfoHint": "Inclua um telefone se disponível.",
+      "site": "Site",
+      "sitePlaceholder": "https://exemplo.com",
+      "socialLinks": "Redes Sociais",
+      "socialAccountPlaceholder": "usuário ou handle",
+      "removeSocialLink": "Remover",
+      "addSocialLink": "Adicionar rede social",
+      "serviceTypes": "Tipos de serviço",
+      "selectServiceType": "Selecione um tipo de serviço",
+  "serviceTypesHint": "Escolha uma ou mais categorias de serviço relevantes para este local.",
+  "loadingServiceTypes": "Carregando tipos de serviço...",
+  "errorLoadingServiceTypes": "Falha ao carregar os tipos de serviço.",
+  "noServiceTypes": "Nenhum tipo de serviço disponível.",
+  "retry": "Tentar novamente",
+  "addressSuggestionsUnavailable": "Sugestões de endereço indisponíveis no momento.",
+      "cancel": "Cancelar",
+      "submit": "Enviar Lugar",
+      "submitting": "Enviando...",
+      "errors": {
+        "nameRequired": "O nome do lugar é obrigatório.",
+        "descriptionRequired": "A descrição é obrigatória.",
+        "addressRequired": "O endereço é obrigatório.",
+        "invalidCoordinates": "Por favor selecione um endereço válido nas sugestões para obter as coordenadas.",
+        "ratingInvalid": "Forneça uma classificação entre 1 e 5.",
+        "general": "Falha ao criar o lugar. Por favor, tente novamente mais tarde."
+      }
+    }
+  },
   "cta": {
     "title": "Junte-se à Nossa Comunidade",
     "description": "Ajude outras pessoas compartilhando lugares amigáveis para neurodivergentes que você conhece e ama.",
@@ -44,7 +95,7 @@
     "placeType": "Tipo de Serviço",
     "address": "Endereço",
     "city": "Cidade",
-    "description": "Descrição",
+
     "submit": "Enviar Lugar"
   },
   "login": {
@@ -52,6 +103,8 @@
     "email": "E-mail",
     "password": "Senha",
     "submit": "Entrar",
+    "loading": "Entrando...",
+    "error": "E-mail ou senha inválidos. Por favor, tente novamente.",
     "noAccount": "Não tem uma conta?",
     "register": "Registre-se aqui"
   },
@@ -64,5 +117,21 @@
     "submit": "Registrar",
     "hasAccount": "Já tem uma conta?",
     "login": "Entre aqui"
+  },
+  "placeSubmitted": {
+    "title": "Submissão Realizada com Sucesso!",
+    "subtitle": "Obrigado por contribuir com nossa comunidade amigável para neurodivergentes.",
+    "receiptNumber": "Número do Recibo",
+    "whatsNextTitle": "O que acontece agora?",
+    "step1": "Sua submissão está sendo revisada pela equipe AtipicALI",
+    "step2": "Vamos verificar as informações e garantir que atendem às diretrizes da comunidade",
+    "step3": "Você receberá uma notificação assim que seu lugar for aprovado e publicado",
+    "timelineTitle": "Prazo Esperado:",
+    "timelineMessage": "Nosso objetivo é revisar e responder a todas as submissões em até 48 horas.",
+    "questionsTitle": "Tem dúvidas?",
+    "questionsMessage": "Se você tiver alguma dúvida sobre sua submissão ou precisar fazer alterações, entre em contato:",
+    "backToHome": "Voltar ao Início",
+    "addAnother": "Adicionar Outro Lugar",
+    "keepReceipt": "Guarde seu número de recibo para referência"
   }
 }

@@ -25,6 +25,57 @@
     "error": "Failed to load places. Please try again later.",
     "viewDetails": "View Details"
   },
+  "places": {
+    "addPlace": {
+      "title": "Add a New Place",
+      "subtitle": "Share a neurodivergent-friendly place with the community.",
+      "name": "Place Name",
+      "namePlaceholder": "Ex: Cozy Cafe",
+      "description": "Description",
+      "descriptionPlaceholder": "Briefly describe the place and accessibility features",
+      "locationInfo": "Location & Address",
+      "locationHelp": "Start typing an address and select it from suggestions. We use this to place the pin on the map.",
+      "address": "Address",
+      "addressPlaceholder": "Street, number, neighborhood",
+      "openMap": "Open in map",
+      "comment": "Comment",
+      "optional": "Optional",
+      "commentPlaceholder": "Any additional notes (quiet hours, sensory tips, etc.)",
+      "imageUrl": "Image URL",
+      "imageUrlPlaceholder": "Paste an image URL (jpg, png)",
+      "imagePreview": "Image preview",
+      "imageLoadError": "Failed to load image from the provided URL.",
+      "rating": "Accessibility Rating",
+      "contactInfo": "Contact (phone)",
+      "contactInfoPlaceholder": "Ex: +1 555 555 555",
+      "contactInfoHint": "Include a phone number if available.",
+      "site": "Website",
+      "sitePlaceholder": "https://example.com",
+      "socialLinks": "Social Accounts",
+      "socialAccountPlaceholder": "username or handle",
+      "removeSocialLink": "Remove",
+      "addSocialLink": "Add social account",
+      "serviceTypes": "Service types",
+      "selectServiceType": "Select a service type",
+  "serviceTypesHint": "Choose one or more service categories relevant to this place.",
+  "loadingServiceTypes": "Loading service types...",
+  "errorLoadingServiceTypes": "Failed to load service types.",
+  "noServiceTypes": "No service types available.",
+  "retry": "Retry",
+  "addressSuggestionsUnavailable": "Address suggestions are currently unavailable.",
+      "cancel": "Cancel",
+      "submit": "Submit Place",
+      "submitting": "Submitting...",
+      "errors": {
+        "nameRequired": "Place name is required.",
+        "descriptionRequired": "Description is required.",
+        "addressRequired": "Address is required.",
+        "invalidCoordinates": "Please select a valid address from suggestions so we can get coordinates.",
+        "ratingInvalid": "Please provide a rating between 1 and 5.",
+        "general": "Failed to create place. Please try again later."
+      }
+    }
+  },
   "cta": {
     "title": "Join Our Community",
     "description": "Help others by sharing neurodivergent-friendly places you know and love.",
@@ -44,7 +95,6 @@
     "placeType": "Type of Service",
     "address": "Address",
     "city": "City",
-    "description": "Description",
     "submit": "Submit Place"
   },
   "login": {
@@ -52,6 +102,8 @@
     "email": "Email",
     "password": "Password",
     "submit": "Login",
+    "loading": "Logging in...",
+    "error": "Invalid email or password. Please try again.",
     "noAccount": "Don't have an account?",
     "register": "Register here"
   },
@@ -64,5 +116,21 @@
     "submit": "Register",
     "hasAccount": "Already have an account?",
     "login": "Login here"
+  },
+  "placeSubmitted": {
+    "title": "Submission Successful!",
+    "subtitle": "Thank you for contributing to our neurodivergent-friendly community.",
+    "receiptNumber": "Receipt Number",
+    "whatsNextTitle": "What happens next?",
+    "step1": "Your submission is being reviewed by our AtipicALI team",
+    "step2": "We'll verify the information and ensure it meets our community guidelines",
+    "step3": "You'll receive a notification once your place is approved and published",
+    "timelineTitle": "Expected Timeline:",
+    "timelineMessage": "We aim to review and respond to all submissions within 48 hours.",
+    "questionsTitle": "Have questions?",
+    "questionsMessage": "If you have any questions about your submission or need to make changes, feel free to reach out:",
+    "backToHome": "Back to Home",
+    "addAnother": "Add Another Place",
+    "keepReceipt": "Keep your receipt number for reference"
   }
 }
