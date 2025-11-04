@@ -9,7 +9,8 @@
     "search": "Search",
     "serviceType": "Service type",
     "location": "Location",
-    "news": "News"
+    "news": "News",
+    "createPlace": "Create a Place"
   },
   "hero": {
     "title": "Discover Neurodivergent-Friendly Places",
@@ -144,7 +145,8 @@
     "contact": "Contact",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "copyright": "© 2025 AtipicALI. All rights reserved."
+    "copyright": "© 2025 AtipicALI. All rights reserved.",
+    "language": "Language"
   },
   "addPlace": {
     "title": "Add a New Place",

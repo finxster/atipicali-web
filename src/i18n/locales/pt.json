@@ -9,7 +9,8 @@
     "search": "Buscar",
     "serviceType": "Tipo de serviço",
     "location": "Localização",
-    "news": "Notícias"
+    "news": "Notícias",
+    "createPlace": "Adicionar Lugar"
   },
   "hero": {
     "title": "Descubra Lugares Amigáveis para Neurodivergentes",
@@ -144,7 +145,8 @@
     "contact": "Contato",
     "privacy": "Política de Privacidade",
     "terms": "Termos de Serviço",
-    "copyright": "© 2025 AtipicALI. Todos os direitos reservados."
+    "copyright": "© 2025 AtipicALI. Todos os direitos reservados.",
+    "language": "Idioma"
   },
   "addPlace": {
     "title": "Adicionar Novo Lugar",

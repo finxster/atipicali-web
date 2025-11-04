@@ -24,25 +24,11 @@
         </div>
 
         <div class="flex items-center space-x-4">
-          <router-link to="/news" class="hidden sm:block text-gray-700 hover:text-atipicali-blue font-semibold transition-colors">
-            {{ $t('navbar.news') }}
+          <router-link to="/add-place" class="hidden sm:block bg-atipicali-green hover:opacity-90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+            {{ $t('navbar.createPlace') }}
           </router-link>
-          <div class="flex items-center space-x-2 border-r pr-4">
-            <button 
-              @click="changeLocale('en')"
-              :class="['text-2xl hover:opacity-70 transition-opacity', locale === 'en' ? 'opacity-100' : 'opacity-40']"
-              title="English"
-            >
-              🇺🇸
-            </button>
-            <button 
-              @click="changeLocale('pt')"
-              :class="['text-2xl hover:opacity-70 transition-opacity', locale === 'pt' ? 'opacity-100' : 'opacity-40']"
-              title="Português"
-            >
-              🇧🇷
-            </button>
-          </div>
+
+          <div class="hidden sm:block border-l pl-4"></div>
 
           <template v-if="isAuthenticated">
             <div class="flex items-center space-x-2">
