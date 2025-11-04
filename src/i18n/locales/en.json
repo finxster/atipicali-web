@@ -1,4 +1,7 @@
 {
+  "common": {
+    "close": "Close"
+  },
   "navbar": {
     "title": "AtipicALI",
     "register": "Register",
@@ -43,6 +46,42 @@
     "loading": "Loading places...",
     "error": "Failed to load places. Please try again later.",
     "viewDetails": "View Details"
+  },
+  "placePage": {
+    "loading": "Loading place details...",
+    "error": "Failed to load place details. Please try again later.",
+    "retry": "Try Again",
+    "about": "About This Place",
+    "details": "Details",
+    "reviews": "Reviews",
+    "serviceTypes": "Service Types",
+    "contact": "Contact Information",
+    "phone": "Phone",
+    "website": "Website",
+    "socialLinks": "Social Links",
+    "address": "Address",
+    "viewOnMap": "View on Map",
+    "map": "Location",
+    "back": "Back to Places",
+    "noReviews": "No reviews yet. Be the first to share your experience!",
+    "notEnoughReviews": "Not enough reviews yet",
+    "averageRating": "Average Rating",
+    "rating": "Rating",
+    "reviewedBy": "Reviewed by",
+    "on": "on",
+    "reviewCount": "reviews",
+    "shareYourExperience": "Share Your Experience",
+    "selectRating": "Select a rating",
+    "writeReview": "Write your review...",
+    "reviewPlaceholder": "Tell others about your experience at this place. What did you like? Any tips for visitors?",
+    "submitReview": "Submit Review",
+    "submitting": "Submitting...",
+    "loginToReview": "Please log in to submit a review",
+    "reviewSubmitted": "Thank you! Your review has been submitted.",
+    "reviewError": "Failed to submit your review. Please try again.",
+    "reviewRequired": "Please select a rating and write a comment",
+    "commentRequired": "Please write a comment (at least 10 characters)",
+    "ratingRequired": "Please select a rating"
   },
   "places": {
     "addPlace": {

@@ -36,4 +36,11 @@ api.interceptors.response.use(
   }
 )
 
+// Place API methods
+export const placeAPI = {
+  getPlace: (id) => api.get(`/api/public/places/${id}`),
+  getPlaceReviews: (id) => api.get(`/api/public/places/${id}/reviews`),
+  submitPlaceReview: (placeId, data) => api.post(`/api/places/${placeId}/reviews`, data)
+}
+
 export default api

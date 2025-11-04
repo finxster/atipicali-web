@@ -1,4 +1,7 @@
 {
+  "common": {
+    "close": "Fechar"
+  },
   "navbar": {
     "title": "AtipicALI",
     "register": "Registrar",
@@ -43,6 +46,42 @@
     "loading": "Carregando lugares...",
     "error": "Falha ao carregar lugares. Por favor, tente novamente mais tarde.",
     "viewDetails": "Ver Detalhes"
+  },
+  "placePage": {
+    "loading": "Carregando detalhes do lugar...",
+    "error": "Falha ao carregar detalhes do lugar. Por favor, tente novamente mais tarde.",
+    "retry": "Tentar Novamente",
+    "about": "Sobre Este Lugar",
+    "details": "Detalhes",
+    "reviews": "Avaliações",
+    "serviceTypes": "Tipos de Serviço",
+    "contact": "Informações de Contato",
+    "phone": "Telefone",
+    "website": "Site",
+    "socialLinks": "Redes Sociais",
+    "address": "Endereço",
+    "viewOnMap": "Ver no Mapa",
+    "map": "Localização",
+    "back": "Voltar para Lugares",
+    "noReviews": "Sem avaliações ainda. Seja o primeiro a compartilhar sua experiência!",
+    "notEnoughReviews": "Avaliações insuficientes",
+    "averageRating": "Avaliação Média",
+    "rating": "Avaliação",
+    "reviewedBy": "Avaliado por",
+    "on": "em",
+    "reviewCount": "avaliações",
+    "shareYourExperience": "Compartilhe Sua Experiência",
+    "selectRating": "Selecione uma avaliação",
+    "writeReview": "Escreva sua avaliação...",
+    "reviewPlaceholder": "Conte aos outros sobre sua experiência neste lugar. O que você gostou? Alguma dica para os visitantes?",
+    "submitReview": "Enviar Avaliação",
+    "submitting": "Enviando...",
+    "loginToReview": "Por favor, faça login para enviar uma avaliação",
+    "reviewSubmitted": "Obrigado! Sua avaliação foi enviada.",
+    "reviewError": "Falha ao enviar sua avaliação. Por favor, tente novamente.",
+    "reviewRequired": "Por favor, selecione uma avaliação e escreva um comentário",
+    "commentRequired": "Por favor, escreva um comentário (pelo menos 10 caracteres)",
+    "ratingRequired": "Por favor, selecione uma avaliação"
   },
   "places": {
     "addPlace": {
