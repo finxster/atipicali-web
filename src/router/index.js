@@ -7,6 +7,10 @@ import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import NewsPage from '../pages/NewsPage.vue'
 import SearchResults from '../pages/SearchResults.vue'
+import About from '../pages/About.vue'
+import Contact from '../pages/Contact.vue'
+import PrivacyPolicy from '../pages/PrivacyPolicy.vue'
+import TermsOfUse from '../pages/TermsOfUse.vue'
 
 const routes = [
   {
@@ -48,6 +52,26 @@ const routes = [
     path: '/search',
     name: 'SearchResults',
     component: SearchResults
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact
+  },
+  {
+    path: '/privacy',
+    name: 'PrivacyPolicy',
+    component: PrivacyPolicy
+  },
+  {
+    path: '/terms',
+    name: 'TermsOfUse',
+    component: TermsOfUse
   }
 ]
 

@@ -17,16 +17,16 @@
         <div>
           <h4 class="font-semibold mb-4">Company</h4>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{{ $t('footer.about') }}</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{{ $t('footer.contact') }}</a></li>
+            <li><router-link to="/about" class="text-gray-400 hover:text-white transition-colors">{{ $t('footer.about') }}</router-link></li>
+            <li><router-link to="/contact" class="text-gray-400 hover:text-white transition-colors">{{ $t('footer.contact') }}</router-link></li>
           </ul>
         </div>
 
         <div>
           <h4 class="font-semibold mb-4">Legal</h4>
           <ul class="space-y-2">
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{{ $t('footer.privacy') }}</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">{{ $t('footer.terms') }}</a></li>
+            <li><router-link to="/privacy" class="text-gray-400 hover:text-white transition-colors">{{ $t('footer.privacy') }}</router-link></li>
+            <li><router-link to="/terms" class="text-gray-400 hover:text-white transition-colors">{{ $t('footer.terms') }}</router-link></li>
           </ul>
         </div>
 

@@ -222,5 +222,131 @@
     "serviceTypesFilter": "Tipos de Serviço",
     "clearSelection": "Limpar",
     "mapNotAvailable": "Mapa não está disponível para esta busca"
+  },
+  "about": {
+    "title": "Sobre AtipicALI",
+    "subtitle": "Construindo uma comunidade inclusiva para indivíduos neurodivergentes",
+    "mission": "Nossa Missão",
+    "missionDescription": "AtipicALI é dedicada a criar um diretório confiável de lugares e serviços amigáveis para neurodivergentes. Capacitamos a comunidade neurodivergente conectando-os com empresas inclusivas, provedores de saúde e espaços que compreendem e apoiam suas necessidades únicas.",
+    "vision": "Nossa Visão",
+    "visionDescription": "Visionamos um mundo onde indivíduos neurodivergentes possam encontrar e acessar facilmente espaços seguros, acolhedores e acomodadores. Acreditamos que a diversidade no pensamento e na percepção fortalece comunidades e impulsiona inovação.",
+    "values": "Nossos Valores",
+    "value1": {
+      "title": "Acessibilidade em Primeiro Lugar",
+      "description": "Priorizamos a acessibilidade em tudo o que fazemos, garantindo que nossa plataforma e recursos estejam disponíveis para todos."
+    },
+    "value2": {
+      "title": "Orientado pela Comunidade",
+      "description": "Acreditamos no poder do feedback da comunidade e da colaboração para construir melhores soluções para indivíduos neurodivergentes."
+    },
+    "value3": {
+      "title": "Autêntico e Inclusivo",
+      "description": "Celebramos a neurodiversidade como uma parte natural e valiosa da variação humana, promovendo inclusão genuína."
+    }
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "subtitle": "Gostaríamos de ouvir você. Envie-nos uma mensagem e responderemos o mais breve possível.",
+    "getInTouch": "Informações de Contato",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "followUs": "Nos Siga",
+    "sendMessage": "Envie-nos uma Mensagem",
+    "formName": "Nome Completo",
+    "formNamePlaceholder": "Seu nome",
+    "formEmail": "Endereço de E-mail",
+    "formEmailPlaceholder": "seu.email@exemplo.com",
+    "formSubject": "Assunto",
+    "formSubjectPlaceholder": "Do que se trata?",
+    "formMessage": "Mensagem",
+    "formMessagePlaceholder": "Nos conte mais sobre sua consulta...",
+    "sending": "Enviando...",
+    "successMessage": "Obrigado por sua mensagem! Entraremos em contato em breve."
+  },
+  "privacy": {
+    "title": "Política de Privacidade",
+    "subtitle": "Respeitamos sua privacidade e nos comprometemos em proteger seus dados pessoais",
+    "lastUpdated": "Última Atualização",
+    "section1": {
+      "title": "1. Introdução",
+      "content": "AtipicALI (\"nós\", \"nos\" ou \"nosso\") opera o site e aplicativo AtipicALI. Esta página informa você sobre nossas políticas sobre a coleta, uso e divulgação de dados pessoais quando você usa nosso Serviço e as escolhas que você tem associadas a esses dados."
+    },
+    "section2": {
+      "title": "2. Coleta e Uso de Informações",
+      "intro": "Coletamos vários tipos diferentes de informações para vários propósitos a fim de fornecer e melhorar nosso Serviço para você:",
+      "item1": "Dados Pessoais: Ao usar nosso Serviço, podemos pedir-lhe que forneça certas informações pessoalmente identificáveis que possam ser usadas para contatá-lo ou identificá-lo (\"Dados Pessoais\"). Isso pode incluir, mas não se limita a: Endereço de e-mail, Primeiro e último nome, Número de telefone, Cookies e Dados de Uso",
+      "item2": "Dados de Uso: Também podemos coletar informações sobre como o Serviço é acessado e usado (\"Dados de Uso\"). Isso pode incluir informações como endereço de Protocolo de Internet do seu computador, tipo de navegador, versão do navegador, páginas visitadas, hora e data de sua visita e outros dados de diagnóstico.",
+      "item3": "Cookies de Rastreamento: Usamos cookies e tecnologias de rastreamento semelhantes para rastrear atividades em nosso Serviço e reter certas informações.",
+      "item4": "Serviços de Terceiros: Alguns provedores de serviços que usamos terão acesso aos seus Dados Pessoais apenas para realizar essas tarefas em nosso nome e são obrigados a não divulgá-los ou usá-los para qualquer outro propósito."
+    },
+    "section3": {
+      "title": "3. Uso de Dados",
+      "content": "AtipicALI usa os dados coletados para vários propósitos: Para fornecer e manter nosso Serviço, para notificá-lo sobre alterações em nosso Serviço, para permitir que você participe de recursos interativos de nosso Serviço, para fornecer suporte ao cliente, para reunir análises ou informações valiosas para que possamos melhorar nosso Serviço, para monitorar o uso de nosso Serviço, para detectar, evitar e resolver problemas técnicos."
+    },
+    "section4": {
+      "title": "4. Segurança de Dados",
+      "content": "A segurança de seus dados é importante para nós, mas lembre-se de que nenhum método de transmissão pela Internet ou método de armazenamento eletrônico é 100% seguro. Embora nos esforcemos para usar meios comercialmente aceitáveis ​​para proteger seus Dados Pessoais, não podemos garantir sua segurança absoluta."
+    },
+    "section5": {
+      "title": "5. Alterações Nesta Política de Privacidade",
+      "content": "Podemos atualizar nossa Política de Privacidade de vez em quando. Notificaremos você sobre quaisquer alterações publicando a nova Política de Privacidade nesta página e atualizando a data de 'Última Atualização' no topo desta Política de Privacidade."
+    },
+    "section6": {
+      "title": "6. Entre em Contato",
+      "content": "Se você tiver alguma dúvida sobre esta Política de Privacidade, entre em contato conosco por e-mail no endereço fornecido abaixo."
+    },
+    "section7": {
+      "title": "7. Seus Direitos",
+      "content": "Você tem o direito de acessar, atualizar ou excluir suas informações pessoais a qualquer momento fazendo login em sua conta ou entrando em contato conosco. Responderemos ao seu pedido dentro de 30 dias."
+    },
+    "contact": {
+      "title": "Entre em Contato Sobre Privacidade",
+      "description": "Se você tiver alguma dúvida ou preocupação sobre nossa Política de Privacidade, não hesite em entrar em contato:"
+    }
+  },
+  "terms": {
+    "title": "Termos de Serviço",
+    "subtitle": "Por favor, leia atentamente estes termos de serviço antes de usar o AtipicALI",
+    "lastUpdated": "Última Atualização",
+    "section1": {
+      "title": "1. Concordância com os Termos",
+      "content": "Ao acessar e usar o site e aplicativo AtipicALI, você aceita e concorda em estar vinculado pelos termos e disposições deste acordo. Se você não concordar em cumprir o acima, não use este serviço."
+    },
+    "section2": {
+      "title": "2. Licença de Uso",
+      "intro": "É concedida permissão para baixar temporariamente uma cópia dos materiais (informações ou software) no AtipicALI apenas para visualização pessoal, não comercial e transitória. Esta é a concessão de uma licença, não uma transferência de título, e sob esta licença você não pode:",
+      "item1": "Modificar ou copiar os materiais",
+      "item2": "Usar os materiais para qualquer finalidade comercial ou para qualquer exibição pública",
+      "item3": "Tentar descompilar ou fazer engenharia reversa de qualquer software contido no site",
+      "item4": "Remover qualquer direito autoral ou outras notações proprietárias dos materiais",
+      "item5": "Transmitir os materiais para qualquer pessoa ou \"espelhar\" os materiais em qualquer outro servidor"
+    },
+    "section3": {
+      "title": "3. Aviso Legal",
+      "content": "Os materiais no AtipicALI são fornecidos \"como estão\". AtipicALI não faz garantias, expressas ou implícitas, e por este meio se isenta e nega todas as outras garantias, incluindo, sem limitação, garantias implícitas ou condições de comercialibilidade, adequação a um propósito específico, ou não violação de propriedade intelectual ou outra violação de direitos."
+    },
+    "section4": {
+      "title": "4. Limitações",
+      "intro": "Em nenhum caso, AtipicALI ou seus fornecedores serão responsáveis por quaisquer danos (incluindo, sem limitação, danos por perda de dados ou lucro, ou devido a interrupção de negócios) decorrentes do uso ou incapacidade de usar os materiais no AtipicALI, mesmo se nós ou um representante autorizado tiver sido notificado oralmente ou por escrito da possibilidade de tal dano. Como algumas jurisdições não permitem limitações em garantias implícitas ou limitações de responsabilidade por danos consequentes ou incidentais, essas limitações podem não se aplicar a você.",
+      "item1": "A precisão ou integridade de qualquer informação no Serviço",
+      "item2": "Qualquer interrupção ou erro no Serviço",
+      "item3": "Qualquer vírus ou código prejudicial transmitido através do Serviço"
+    },
+    "section5": {
+      "title": "5. Precisão dos Materiais",
+      "content": "Os materiais que aparecem no AtipicALI podem incluir erros técnicos, tipográficos ou fotográficos. AtipicALI não garante que nenhum dos materiais em seu site seja preciso, completo ou atual. AtipicALI pode fazer alterações aos materiais contidos em seu site a qualquer momento sem aviso prévio."
+    },
+    "section6": {
+      "title": "6. Links",
+      "content": "AtipicALI não revisou todos os sites vinculados ao seu site e não é responsável pelo conteúdo de nenhum site vinculado. A inclusão de qualquer link não implica endosso de AtipicALI do site. O uso de qualquer site vinculado é por conta e risco do usuário."
+    },
+    "section7": {
+      "title": "7. Modificações",
+      "content": "AtipicALI pode revisar estes termos de serviço de seu site a qualquer momento sem aviso prévio. Ao usar este site, você concorda em estar vinculado pela versão atual destes termos de serviço."
+    },
+    "contact": {
+      "title": "Entre em Contato Sobre Termos",
+      "description": "Se você tiver alguma dúvida sobre estes Termos de Serviço, entre em contato conosco em:"
+    }
   }
 }
