@@ -7,7 +7,8 @@
     "register": "Register",
     "login": "Login",
     "search": "Search",
-    "serviceType": "Service type",
+    "serviceType": "Search by name, type, or description...",
+    "serviceTypeHint": "Or type freely and press Enter to search",
     "location": "Location",
     "selectLocation": "Select a location",
     "currentLocation": "Current Location",
@@ -198,7 +199,7 @@
     "keepReceipt": "Keep your receipt number for reference"
   },
   "search": {
-    "title": "Search Results",
+    "title": "Search results near ",
     "subtitle": "Neurodivergent-friendly places",
     "noQuery": "Please search for a place to get started.",
     "noResults": "No places found matching your search.",

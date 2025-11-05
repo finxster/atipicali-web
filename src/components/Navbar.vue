@@ -8,33 +8,80 @@
         </router-link>
 
         <div class="hidden md:flex items-center space-x-2 flex-1 max-w-2xl mx-8">
-          <!-- Service Type Input -->
-          <input 
-            v-model="searchForm.serviceType"
-            type="text" 
-            :placeholder="$t('navbar.serviceType')"
-            class="input-field flex-1"
-            @keydown.enter="handleSearch"
-          />
+          <!-- Service Type Input with Autocomplete -->
+          <div class="relative flex-[2]">
+            <div class="relative w-full">
+              <input 
+                ref="serviceTypeInput"
+                v-model="searchForm.serviceType"
+                type="text" 
+                :placeholder="$t('navbar.serviceType')"
+                class="input-field w-full h-12 text-sm"
+                @input="handleServiceTypeInput"
+                @focus="handleServiceTypeFocus"
+                @blur="handleServiceTypeBlur"
+                @keydown.down.prevent="navigateServiceTypeSuggestions(1)"
+                @keydown.up.prevent="navigateServiceTypeSuggestions(-1)"
+                @keydown.enter.prevent="handleServiceTypeEnter"
+                @keydown.escape="showServiceTypeSuggestions = false"
+                autocomplete="off"
+              />
 
-          <!-- Location Input with Tag Style (like Gmail) -->
-          <div class="relative flex-1">
+              <!-- Service Type Autocomplete Dropdown -->
+              <div
+                v-if="showServiceTypeSuggestions && filteredServiceTypes.length > 0"
+                class="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg max-h-64 overflow-y-auto"
+              >
+                <!-- Hint for free text -->
+                <div class="px-4 py-2 bg-blue-50 border-b border-blue-100 text-xs text-gray-600 italic">
+                  💡 {{ $t('navbar.serviceTypeHint') }}
+                </div>
+                
+                <button
+                  v-for="(serviceType, index) in filteredServiceTypes"
+                  :key="serviceType.id"
+                  type="button"
+                  @mousedown.prevent="selectServiceType(index)"
+                  class="w-full px-4 py-2.5 text-left hover:bg-green-50 transition-colors border-b border-gray-100 last:border-b-0 flex items-start space-x-2"
+                  :class="{ 'bg-green-50': index === selectedServiceTypeIndex }"
+                >
+                  <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-gray-900">{{ getServiceTypeLabel(serviceType) }}</p>
+                  </div>
+                </button>
+              </div>
+
+              <!-- Loading indicator -->
+              <div v-if="isLoadingServiceTypes" class="absolute right-3 top-1/2 -translate-y-1/2">
+                <svg class="w-5 h-5 animate-spin text-green-600" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location Input with Tag Style -->
+          <div class="relative flex-[3] min-w-0">
             <div class="relative w-full">
               <!-- Tag-style container with validation state -->
               <div 
-                class="input-field w-full flex items-center gap-2 py-2 pl-3 pr-2 min-h-10"
+                class="input-field w-full flex items-center gap-2 pl-3 pr-2 h-12 overflow-hidden"
                 :class="locationValidationError ? 'border-red-500 bg-red-50' : ''"
                 @click="locationInput?.focus()"
               >
                 <!-- Active location tag -->
-                <div v-if="displayLocation" class="flex items-center gap-1 bg-atipicali-blue text-white px-3 py-1 rounded-full text-sm font-medium flex-shrink-0 max-w-xs truncate">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <div v-if="displayLocation" class="flex items-center gap-1 bg-atipicali-blue text-white px-2.5 py-1 rounded-full text-sm font-medium flex-shrink-0 truncate" style="max-width: calc(100% - 2rem);">
+                  <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
                   </svg>
-                  {{ displayLocation.name || 'Selected Location' }}
+                  <span class="truncate">{{ displayLocation.name || 'Selected Location' }}</span>
                   <button 
                     @click.stop="clearSelectedLocation"
-                    class="ml-1 hover:opacity-80 transition-opacity"
+                    class="ml-1 hover:opacity-80 transition-opacity flex-shrink-0"
                   >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -48,7 +95,7 @@
                   v-model="searchForm.location"
                   type="text" 
                   :placeholder="displayLocation ? '' : $t('navbar.selectLocation')"
-                  class="flex-1 bg-transparent outline-none text-sm"
+                  class="flex-1 min-w-0 bg-transparent outline-none text-sm"
                   :class="locationValidationError ? 'placeholder-red-500' : ''"
                   @input="handleLocationInput"
                   @focus="handleLocationFocus"
@@ -57,6 +104,7 @@
                   @keydown.up.prevent="navigateSuggestions(-1)"
                   @keydown.enter.prevent="handleLocationEnter"
                   @keydown.escape="showLocationSuggestions = false"
+                  @keydown="handleLocationKeydown"
                   autocomplete="off"
                 />
               </div>
@@ -79,6 +127,7 @@
                   </svg>
                   <div class="flex-1 min-w-0">
                     <p class="text-sm font-medium text-gray-900">{{ $t('navbar.currentLocation') }}</p>
+                    <p v-if="userLocation.addressDisplay" class="text-xs text-gray-500 truncate">{{ userLocation.addressDisplay }}</p>
                   </div>
                 </button>
 
@@ -174,6 +223,7 @@ import { useRouter } from 'vue-router'
 import { setLocale } from '../i18n'
 import { useAuthStore } from '../stores/auth'
 import { useLocationStore } from '../stores/location'
+import { placeAPI } from '../services/api'
 
 const { locale, t } = useI18n()
 const router = useRouter()
@@ -200,6 +250,14 @@ const searchForm = ref({
   location: ''
 })
 
+// Service type state
+const serviceTypeInput = ref(null)
+const allServiceTypes = ref([])
+const showServiceTypeSuggestions = ref(false)
+const isLoadingServiceTypes = ref(false)
+const selectedServiceTypeIndex = ref(0)
+const userNavigatedWithKeyboard = ref(false) // Track if user used arrow keys
+
 // Location autocomplete state
 const locationInput = ref(null)
 const locationSuggestions = ref([])
@@ -216,13 +274,20 @@ const fallbackLocation = ref(null)
 const locationValidationError = ref(false)
 const locationCleared = ref(false) // Track if user manually cleared location
 
-// Computed: Display location (priority: selected > store > userLocation > fallbackLocation)
+// Computed: Display location badge (only show when explicitly selected)
 const displayLocation = computed(() => {
-  // If user manually cleared location, don't show anything
-  if (locationCleared.value) {
-    return null
+  // Only show badge if user explicitly selected a location
+  if (selectedLocation.value) {
+    return selectedLocation.value
   }
-  
+  if (locationStore.getLocation.value) {
+    return locationStore.getLocation.value
+  }
+  return null
+})
+
+// Computed: Get coordinates for search (includes auto-location fallbacks)
+const searchCoordinates = computed(() => {
   if (selectedLocation.value) {
     return selectedLocation.value
   }
@@ -255,14 +320,125 @@ const DEFAULT_LOCATIONS = {
   }
 }
 
+// Service Type Functions
+const getServiceTypeLabel = (serviceType) => {
+  if (!serviceType) return ''
+  if (locale.value === 'en') {
+    return serviceType.nameEn || serviceType.name || ''
+  }
+  return serviceType.namePt || serviceType.name || ''
+}
+
+const filteredServiceTypes = computed(() => {
+  const query = searchForm.value.serviceType.trim().toLowerCase()
+  if (!query) return allServiceTypes.value
+
+  // Filter service types that match the query
+  return allServiceTypes.value.filter(st => {
+    const label = getServiceTypeLabel(st).toLowerCase()
+    return label.includes(query)
+  })
+})
+
+const handleServiceTypeInput = () => {
+  const query = searchForm.value.serviceType.trim()
+  
+  // Reset keyboard navigation flag when user types
+  userNavigatedWithKeyboard.value = false
+  
+  if (query.length > 0) {
+    showServiceTypeSuggestions.value = true
+    selectedServiceTypeIndex.value = 0
+  } else {
+    showServiceTypeSuggestions.value = false
+  }
+}
+
+const handleServiceTypeFocus = () => {
+  if (allServiceTypes.value.length > 0) {
+    showServiceTypeSuggestions.value = true
+    selectedServiceTypeIndex.value = 0
+  }
+}
+
+const handleServiceTypeBlur = () => {
+  setTimeout(() => {
+    showServiceTypeSuggestions.value = false
+  }, 200)
+}
+
+const navigateServiceTypeSuggestions = (direction) => {
+  if (filteredServiceTypes.value.length === 0) return
+  userNavigatedWithKeyboard.value = true // Mark that user used keyboard navigation
+  selectedServiceTypeIndex.value += direction
+  if (selectedServiceTypeIndex.value < 0) {
+    selectedServiceTypeIndex.value = filteredServiceTypes.value.length - 1
+  } else if (selectedServiceTypeIndex.value >= filteredServiceTypes.value.length) {
+    selectedServiceTypeIndex.value = 0
+  }
+}
+
+const selectServiceType = (index) => {
+  if (index < 0 || index >= filteredServiceTypes.value.length) return
+  
+  const serviceType = filteredServiceTypes.value[index]
+  const serviceTypeName = getServiceTypeLabel(serviceType)
+  
+  // Fill the input with the service type name and trigger search
+  searchForm.value.serviceType = serviceTypeName
+  showServiceTypeSuggestions.value = false
+  
+  // Trigger search automatically
+  handleSearch()
+}
+
+const handleServiceTypeEnter = () => {
+  // Only select from dropdown if user explicitly navigated with arrow keys
+  if (showServiceTypeSuggestions.value && 
+      filteredServiceTypes.value.length > 0 && 
+      userNavigatedWithKeyboard.value) {
+    selectServiceType(selectedServiceTypeIndex.value)
+  } else {
+    // Otherwise, just trigger search
+    showServiceTypeSuggestions.value = false
+    handleSearch()
+  }
+}
+
+const fetchServiceTypes = async () => {
+  if (allServiceTypes.value.length > 0) return // Already loaded
+  
+  isLoadingServiceTypes.value = true
+  try {
+    const response = await placeAPI.getServiceTypes()
+    allServiceTypes.value = response.data || []
+  } catch (error) {
+    console.error('Error fetching service types:', error)
+    allServiceTypes.value = []
+  } finally {
+    isLoadingServiceTypes.value = false
+  }
+}
+
 // Request user's geolocation
 const requestGeolocation = () => {
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
+        
         userLocation.value = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
+          latitude,
+          longitude
+        }
+        
+        // Reverse geocode to get address
+        await reverseGeocodeCurrentLocation(latitude, longitude)
+        
+        // Auto-select current location if no location is already set
+        if (!selectedLocation.value && !locationStore.getLocation.value) {
+          selectCurrentLocation()
         }
       },
       (error) => {
@@ -276,6 +452,68 @@ const requestGeolocation = () => {
     // Browser doesn't support geolocation, use fallback
     const locale_value = locale.value || 'en'
     fallbackLocation.value = DEFAULT_LOCATIONS[locale_value] || DEFAULT_LOCATIONS['en']
+  }
+}
+
+// Reverse geocode to get address from coordinates
+const reverseGeocodeCurrentLocation = async (latitude, longitude) => {
+  try {
+    const googleApiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}`
+    const proxyUrl = `https://atipicali.com/maps-proxy/?url=${encodeURIComponent(googleApiUrl)}`
+    const response = await fetch(proxyUrl)
+    const data = await response.json()
+    
+    if (data.status === 'OK' && data.results && data.results.length > 0) {
+      // Extract components from address components
+      const result = data.results[0]
+      const addressComponents = result.address_components || []
+      const fullAddress = result.formatted_address
+      
+      let streetNumber = ''
+      let streetName = ''
+      let city = ''
+      let state = ''
+      
+      // Extract address components
+      for (const component of addressComponents) {
+        if (component.types.includes('street_number')) {
+          streetNumber = component.long_name
+        }
+        if (component.types.includes('route')) {
+          streetName = component.long_name
+        }
+        if (component.types.includes('locality')) {
+          city = component.long_name
+        }
+        if (component.types.includes('administrative_area_level_1')) {
+          state = component.short_name
+        }
+      }
+      
+      // Format as "Street Number Street Name, City, State" (without zip and country)
+      let addressWithoutZip = ''
+      if (streetNumber && streetName) {
+        addressWithoutZip = `${streetNumber} ${streetName}`
+      } else if (streetName) {
+        addressWithoutZip = streetName
+      }
+      
+      if (city) {
+        addressWithoutZip += (addressWithoutZip ? ', ' : '') + city
+      }
+      if (state) {
+        addressWithoutZip += (addressWithoutZip ? ', ' : '') + state
+      }
+      
+      // Update userLocation with all address versions
+      if (userLocation.value) {
+        userLocation.value.name = t('navbar.currentLocation') // For badge display
+        userLocation.value.addressDisplay = addressWithoutZip // For dropdown and search results
+        userLocation.value.fullAddress = fullAddress
+      }
+    }
+  } catch (error) {
+    console.error('Error reverse geocoding location:', error)
   }
 }
 
@@ -332,6 +570,15 @@ const handleLocationInput = () => {
   locationDebounceTimer = setTimeout(() => {
     fetchLocationSuggestions(query)
   }, 300)
+}
+
+// Handle location keydown events
+const handleLocationKeydown = (event) => {
+  // Handle backspace to remove location badge when input is empty
+  if (event.key === 'Backspace' && searchForm.value.location === '' && displayLocation.value) {
+    event.preventDefault()
+    clearSelectedLocation()
+  }
 }
 
 // Navigate through suggestions with keyboard
@@ -407,7 +654,9 @@ const selectCurrentLocation = () => {
   selectedLocation.value = {
     name: t('navbar.currentLocation'),
     latitude: userLocation.value.latitude,
-    longitude: userLocation.value.longitude
+    longitude: userLocation.value.longitude,
+    addressDisplay: userLocation.value.addressDisplay,
+    fullAddress: userLocation.value.fullAddress
   }
   searchForm.value.location = ''
   showLocationSuggestions.value = false
@@ -428,9 +677,9 @@ const handleLocationEnter = () => {
 
 // Handle search
 const handleSearch = () => {
-  // Use displayLocation which has the priority: selected > store > userLocation > fallbackLocation
-  let locationToUse = displayLocation.value
-  let locationName = displayLocation.value?.name
+  // Use searchCoordinates which includes fallbacks for search functionality
+  let locationToUse = searchCoordinates.value
+  let locationName = searchCoordinates.value?.name
 
   // Location is now required
   if (!locationToUse) {
@@ -449,8 +698,10 @@ const handleSearch = () => {
       from: 'search' // Mark that we came from search
     }
 
-    if (searchForm.value.serviceType) {
-      queryParams.text = searchForm.value.serviceType
+    // Add search text if user typed anything
+    const searchText = searchForm.value.serviceType.trim()
+    if (searchText) {
+      queryParams.text = searchText
     }
 
     if (locationToUse) {
@@ -462,8 +713,18 @@ const handleSearch = () => {
       queryParams.locationName = locationName
     }
 
-    // Navigate to results if we have location or service type
-    if (locationToUse || searchForm.value.serviceType) {
+    // Add address display if available (for dropdown-like display in search results)
+    if (locationToUse?.addressDisplay) {
+      queryParams.addressDisplay = locationToUse.addressDisplay
+    }
+
+    // Add full address if available
+    if (locationToUse?.fullAddress) {
+      queryParams.fullAddress = locationToUse.fullAddress
+    }
+
+    // Navigate to results if we have location or search text
+    if (locationToUse || searchText) {
       router.push({
         name: 'SearchResults',
         query: queryParams
@@ -486,6 +747,7 @@ const changeLocale = (newLocale) => {
 // On mount, request geolocation and sync location from store
 onMounted(() => {
   requestGeolocation()
+  fetchServiceTypes()
   locationCleared.value = false // Reset cleared flag on page load
   
   // If location store has a location set (from SearchResults), use it

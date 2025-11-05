@@ -7,7 +7,8 @@
     "register": "Registrar",
     "login": "Entrar",
     "search": "Buscar",
-    "serviceType": "Tipo de serviço",
+    "serviceType": "Nome, tipo ou descrição...",
+    "serviceTypeHint": "Ou digite livremente e pressione Enter para buscar",
     "location": "Localização",
     "selectLocation": "Selecione uma localização",
     "currentLocation": "Localização Atual",
@@ -199,7 +200,7 @@
     "keepReceipt": "Guarde seu número de recibo para referência"
   },
   "search": {
-    "title": "Resultados de Busca",
+    "title": "Resultados de busca perto de ",
     "subtitle": "Lugares amigáveis para neurodivergentes",
     "noQuery": "Por favor, busque por um lugar para começar.",
     "noResults": "Nenhum lugar encontrado correspondendo sua busca.",
