@@ -12,7 +12,10 @@
         <div class="flex items-center justify-between">
           <div>
             <h1 class="text-3xl font-bold text-gray-900">{{ $t('search.title') }}</h1>
-            <p class="text-sm text-gray-600 mt-1">{{ $t('search.subtitle') }}</p>
+            <p class="text-sm text-gray-600 mt-1">
+              <span v-if="activeLocationName">{{ $t('search.subtitle') }} • 📍 {{ activeLocationName }}</span>
+              <span v-else>{{ $t('search.subtitle') }}</span>
+            </p>
           </div>
           <div class="hidden lg:flex items-center space-x-2">
             <button
@@ -118,6 +121,16 @@
       <div v-else-if="hasQuery" class="flex flex-col lg:flex-row gap-6">
         <!-- Sidebar Filters - Always Visible -->
         <div class="lg:w-72 flex-shrink-0">
+          <!-- Active Location Badge -->
+          <div v-if="activeLocationName" class="bg-white rounded-lg shadow-sm p-4 mb-4">
+            <div class="flex items-center gap-2 bg-atipicali-blue text-white px-4 py-2 rounded-full w-fit">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+              </svg>
+              {{ activeLocationName }}
+            </div>
+          </div>
+
           <div class="bg-white rounded-lg shadow-sm p-4 sticky top-32 space-y-6">
             <h3 class="font-semibold text-gray-900 text-lg">{{ $t('search.filters') }}</h3>
 
@@ -337,9 +350,11 @@ import { useI18n } from 'vue-i18n'
 import { placeAPI } from '../services/api'
 import Footer from '../components/Footer.vue'
 import ImagePlaceholder from '../components/ImagePlaceholder.vue'
+import { useLocationStore } from '../stores/location'
 
 const route = useRoute()
 const { t, locale } = useI18n()
+const locationStore = useLocationStore()
 
 // State
 const places = ref([])
@@ -372,6 +387,21 @@ const hasQuery = computed(() => {
 // Check if we have active filters
 const hasActiveFilters = computed(() => {
   return filterState.value.serviceTypeIds.length > 0 || filterState.value.distanceKm !== 5
+})
+
+// Get active location display name
+const activeLocationName = computed(() => {
+  // Try to get from route query first (if passed as parameter)
+  if (route.query.locationName) {
+    return route.query.locationName
+  }
+  
+  // Fallback to generic "Current Location" or coordinates if available
+  if (searchQuery.value.latitude && searchQuery.value.longitude) {
+    return 'Your Location'
+  }
+  
+  return null
 })
 
 // Get service type label based on locale
@@ -509,6 +539,15 @@ watch(
 
 // Fetch service types and execute initial search on mount
 onMounted(() => {
+  // Set location in store for Navbar to use
+  if (activeLocationName.value) {
+    locationStore.setLocation({
+      name: activeLocationName.value,
+      latitude: searchQuery.value.latitude,
+      longitude: searchQuery.value.longitude
+    })
+  }
+  
   fetchServiceTypes()
   if (hasQuery.value) {
     executeSearch()

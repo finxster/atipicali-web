@@ -9,6 +9,10 @@
     "search": "Buscar",
     "serviceType": "Tipo de serviço",
     "location": "Localização",
+    "selectLocation": "Selecione uma localização",
+    "currentLocation": "Localização Atual",
+    "orStartTyping": "ou comece a digitar para escolher uma localização",
+    "locationRequired": "Localização é obrigatória",
     "news": "Notícias",
     "createPlace": "Adicionar Lugar"
   },
