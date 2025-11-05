@@ -193,5 +193,29 @@
     "backToHome": "Voltar ao Início",
     "addAnother": "Adicionar Outro Lugar",
     "keepReceipt": "Guarde seu número de recibo para referência"
+  },
+  "search": {
+    "title": "Resultados de Busca",
+    "subtitle": "Lugares amigáveis para neurodivergentes",
+    "noQuery": "Por favor, busque por um lugar para começar.",
+    "noResults": "Nenhum lugar encontrado correspondendo sua busca.",
+    "tryAdjustingFilters": "Tente ajustar seus filtros ou limpá-los para ampliar sua busca.",
+    "loading": "Buscando lugares...",
+    "error": "Falha ao buscar lugares. Por favor, tente novamente mais tarde.",
+    "retry": "Tentar Novamente",
+    "viewList": "Visualização em Lista",
+    "viewMap": "Visualização em Mapa",
+    "distance": "Distância",
+    "km": "km",
+    "viewDetails": "Ver Detalhes",
+    "radius": "Raio de Busca",
+    "filters": "Filtros",
+    "filterByRadius": "Filtrar por distância",
+    "clearFilters": "Limpar Filtros",
+    "results": "resultados encontrados",
+    "back": "Voltar",
+    "serviceTypesFilter": "Tipos de Serviço",
+    "clearSelection": "Limpar",
+    "mapNotAvailable": "Mapa não está disponível para esta busca"
   }
 }

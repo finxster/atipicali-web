@@ -45,7 +45,7 @@ const fetchPlaces = async () => {
   try {
     loading.value = true
     error.value = false
-    const response = await api.get('/api/public/places')
+    const response = await api.get('/api/public/places/recent')
     places.value = response.data
   } catch (err) {
     console.error('Error fetching places:', err)

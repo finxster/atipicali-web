@@ -1,10 +1,15 @@
 <template>
   <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-    <img 
-      src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80"
-      alt="Place"
-      class="w-full h-48 object-cover"
-    />
+    <div class="w-full h-48 overflow-hidden flex items-center justify-center">
+      <img 
+        v-if="place.imageUrl"
+        :src="place.imageUrl"
+        :alt="place.name"
+        class="w-full h-full object-cover"
+        @error="imageError = true"
+      />
+      <ImagePlaceholder v-else-if="!imageError" size="xlarge" />
+    </div>
     <div class="p-4">
       <h3 class="text-lg font-semibold mb-2 text-gray-800">{{ place.name }}</h3>
       <div class="flex items-center mb-3">
@@ -22,10 +27,16 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import ImagePlaceholder from './ImagePlaceholder.vue'
+
 defineProps({
   place: {
     type: Object,
     required: true
   }
 })
+
+const imageError = ref(false)
 </script>
+

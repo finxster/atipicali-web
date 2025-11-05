@@ -192,5 +192,29 @@
     "backToHome": "Back to Home",
     "addAnother": "Add Another Place",
     "keepReceipt": "Keep your receipt number for reference"
+  },
+  "search": {
+    "title": "Search Results",
+    "subtitle": "Neurodivergent-friendly places",
+    "noQuery": "Please search for a place to get started.",
+    "noResults": "No places found matching your search.",
+    "tryAdjustingFilters": "Try adjusting your filters or clearing them to broaden your search.",
+    "loading": "Searching places...",
+    "error": "Failed to search places. Please try again later.",
+    "retry": "Try Again",
+    "viewList": "List View",
+    "viewMap": "Map View",
+    "distance": "Distance",
+    "km": "km",
+    "viewDetails": "View Details",
+    "radius": "Search Radius",
+    "filters": "Filters",
+    "filterByRadius": "Filter by distance",
+    "clearFilters": "Clear Filters",
+    "results": "results found",
+    "back": "Back",
+    "serviceTypesFilter": "Service Types",
+    "clearSelection": "Clear",
+    "mapNotAvailable": "Map is not available for this search"
   }
 }

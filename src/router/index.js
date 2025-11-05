@@ -6,6 +6,7 @@ import PlaceSubmitted from '../pages/PlaceSubmitted.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import NewsPage from '../pages/NewsPage.vue'
+import SearchResults from '../pages/SearchResults.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/news',
     name: 'NewsPage',
     component: NewsPage
+  },
+  {
+    path: '/search',
+    name: 'SearchResults',
+    component: SearchResults
   }
 ]
 

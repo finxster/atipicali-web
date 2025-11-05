@@ -2,6 +2,19 @@
   <div>
     <div class="container mx-auto px-4 py-12">
       <div class="max-w-4xl mx-auto">
+        <!-- Back Button - Top -->
+        <div v-if="!loading && place" class="mb-8">
+          <button
+            @click="goBack"
+            class="inline-flex items-center gap-2 text-atipicali-blue hover:text-atipicali-blue-dark font-semibold transition-colors"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            {{ backButtonLabel }}
+          </button>
+        </div>
+
         <!-- Loading State - Skeleton -->
         <div v-if="loading" class="space-y-8">
           <!-- Image skeleton -->
@@ -53,10 +66,8 @@
               :alt="place.name"
               class="w-full h-96 object-cover rounded-lg"
             />
-            <div v-else class="w-full h-96 bg-gradient-to-br from-atipicali-blue-light to-atipicali-blue rounded-lg flex items-center justify-center">
-              <svg class="w-24 h-24 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
+            <div v-else class="rounded-lg overflow-hidden">
+              <ImagePlaceholder size="large" />
             </div>
           </div>
 
@@ -335,15 +346,15 @@
 
           <!-- Back Link -->
           <div class="mt-12 pt-8 border-t border-gray-200">
-            <router-link
-              to="/"
+            <button
+              @click="goBack"
               class="inline-flex items-center gap-2 text-atipicali-blue hover:text-atipicali-blue-dark font-semibold transition-colors"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
               </svg>
-              {{ $t('placePage.back') }}
-            </router-link>
+              {{ backButtonLabel }}
+            </button>
           </div>
         </div>
       </div>
@@ -354,14 +365,16 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Footer from '../components/Footer.vue'
+import ImagePlaceholder from '../components/ImagePlaceholder.vue'
 import { placeAPI } from '../services/api'
 import { useAuthStore } from '../stores/auth'
 
 const route = useRoute()
-const { locale } = useI18n()
+const router = useRouter()
+const { locale, t } = useI18n()
 const authStore = useAuthStore()
 
 const placeId = route.params.id
@@ -388,6 +401,22 @@ const isDismissed = ref(false)
 const currentUserId = computed(() => {
   return authStore.user?.id || authStore.user?.userId || authStore.user?.email
 })
+
+// Smart back button logic
+const backButtonLabel = computed(() => {
+  // Check if we're coming from search results
+  return route.query.from === 'search' ? t('search.back') : t('placePage.back')
+})
+
+const goBack = () => {
+  // If coming from search results with query params, go back to search
+  if (route.query.from === 'search' && window.history.length > 1) {
+    router.back()
+  } else {
+    // Otherwise go home
+    router.push('/')
+  }
+}
 
 const userHasReviewed = computed(() => {
   // First check if marked as submitted

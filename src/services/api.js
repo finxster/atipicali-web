@@ -40,7 +40,11 @@ api.interceptors.response.use(
 export const placeAPI = {
   getPlace: (id) => api.get(`/api/public/places/${id}`),
   getPlaceReviews: (id) => api.get(`/api/public/places/${id}/reviews`),
-  submitPlaceReview: (placeId, data) => api.post(`/api/places/${placeId}/reviews`, data)
+  submitPlaceReview: (placeId, data) => api.post(`/api/places/${placeId}/reviews`, data),
+  // Search places with advanced filters using POST endpoint
+  searchPlaces: (payload) => api.post('/api/public/places/search', payload),
+  // Get all available service types
+  getServiceTypes: () => api.get('/api/public/service-types')
 }
 
 export default api
