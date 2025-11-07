@@ -47,4 +47,9 @@ export const placeAPI = {
   getServiceTypes: () => api.get('/api/public/service-types')
 }
 
+// Contact API methods
+export const contactAPI = {
+  sendContactEmail: (data) => api.post('/api/public/contact/send-email', data)
+}
+
 export default api

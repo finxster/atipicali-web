@@ -23,21 +23,8 @@
                 {{ $t('contact.email') }}
               </h3>
               <p class="text-gray-600">
-                <a href="mailto:hello@atipicali.com" class="text-atipicali-blue hover:text-atipicali-blue-dark transition-colors">
-                  hello@atipicali.com
-                </a>
-              </p>
-            </div>
-
-            <!-- Phone -->
-            <div class="mb-8 p-6 bg-white rounded-lg shadow-md">
-              <h3 class="text-lg font-bold text-gray-800 mb-2 flex items-center gap-2">
-                <span class="text-2xl">📱</span>
-                {{ $t('contact.phone') }}
-              </h3>
-              <p class="text-gray-600">
-                <a href="tel:+551199999999" class="text-atipicali-blue hover:text-atipicali-blue-dark transition-colors">
-                  +55 (11) 9999-9999
+                <a :href="`mailto:${contactEmail}`" class="text-atipicali-blue hover:text-atipicali-blue-dark transition-colors">
+                  {{ contactEmail }}
                 </a>
               </p>
             </div>
@@ -126,6 +113,11 @@
               <div v-if="submitSuccess" class="p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
                 {{ $t('contact.successMessage') }}
               </div>
+
+              <!-- Error Message -->
+              <div v-if="submitError" class="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+                {{ submitError }}
+              </div>
             </form>
           </div>
         </div>
@@ -139,9 +131,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import CTASection from '../components/CTASection.vue'
 import Footer from '../components/Footer.vue'
+import { contactAPI } from '../services/api'
+
+const { locale } = useI18n()
 
 const form = ref({
   name: '',
@@ -152,19 +148,56 @@ const form = ref({
 
 const isSubmitting = ref(false)
 const submitSuccess = ref(false)
+const submitError = ref(null)
+
+// Display language-specific email
+const contactEmail = computed(() => {
+  return locale.value === 'pt' ? 'contato@atipicali.com' : 'hello@atipicali.com'
+})
+
+// Map locale to backend language format
+const getBackendLanguage = () => {
+  return locale.value === 'pt' ? 'pt-br' : 'en'
+}
 
 const submitForm = async () => {
   isSubmitting.value = true
+  submitError.value = null
+  submitSuccess.value = false
+
   try {
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    // Send the form data to the backend with current language
+    await contactAPI.sendContactEmail({
+      name: form.value.name,
+      email: form.value.email,
+      subject: form.value.subject,
+      message: form.value.message,
+      language: getBackendLanguage()
+    })
+
+    // Success: reset form and show message
     submitSuccess.value = true
     form.value = { name: '', email: '', subject: '', message: '' }
+
+    // Auto-hide success message after 5 seconds
     setTimeout(() => {
       submitSuccess.value = false
-    }, 3000)
+    }, 5000)
   } catch (error) {
     console.error('Form submission error:', error)
+    // Show user-friendly error message
+    if (error.response?.data?.message) {
+      submitError.value = error.response.data.message
+    } else if (error.message) {
+      submitError.value = error.message
+    } else {
+      submitError.value = 'An error occurred while sending your message. Please try again.'
+    }
+
+    // Auto-hide error message after 5 seconds
+    setTimeout(() => {
+      submitError.value = null
+    }, 5000)
   } finally {
     isSubmitting.value = false
   }
