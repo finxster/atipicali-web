@@ -74,12 +74,8 @@ onMounted(async () => {
       date: new Date(item.createdAt).toLocaleDateString(),
       excerpt: item.summary,
       image:
-        item.image ||
-        (idx === 1
-          ? new URL('@/assets/news_add_place.png', import.meta.url).href
-          : idx === 0
-          ? new URL('@/assets/news_add_review.png', import.meta.url).href
-          : 'https://via.placeholder.com/400x200?text=News'),
+        item.imageUrl
+        ,
     }))
   } catch (e) {
     console.error('Error fetching news:', e)

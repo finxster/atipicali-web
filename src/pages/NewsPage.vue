@@ -8,19 +8,20 @@
         {{ $t('newsPage.subtitle') }}
       </p>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
         <!-- Main content -->
-        <div class="lg:col-span-2">
+        <div class="lg:col-span-3">
           <!-- Loading state -->
-          <div v-if="loading" class="space-y-6">
+          <div v-if="loading" class="space-y-8">
             <div v-for="n in 3" :key="n" class="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
-              <div class="w-full h-64 bg-gray-200"></div>
+              <div class="w-full h-96 bg-gray-200"></div>
               <div class="p-8">
                 <div class="h-6 w-1/3 bg-gray-200 mb-2 rounded"></div>
                 <div class="h-8 w-2/3 bg-gray-200 mb-4 rounded"></div>
                 <div class="space-y-2 mb-4">
                   <div class="h-4 w-full bg-gray-200 rounded"></div>
                   <div class="h-4 w-5/6 bg-gray-200 rounded"></div>
+                  <div class="h-4 w-4/6 bg-gray-200 rounded"></div>
                 </div>
                 <div class="flex gap-4">
                   <div class="h-4 w-24 bg-gray-200 rounded"></div>
@@ -41,54 +42,62 @@
             </button>
           </div>
 
-          <!-- Articles list -->
-          <div v-else class="space-y-6">
+          <!-- Articles blog-style -->
+          <div v-else class="space-y-12">
             <article
-              v-for="article in paginatedArticles"
+              v-for="article in displayedArticles"
               :key="article.id"
+              :id="`article-${article.id}`"
               class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
             >
-              <!-- Featured image or placeholder -->
-              <ImagePlaceholder size="xlarge" />
+              <!-- Featured image -->
+              <img 
+                v-if="article.imageUrl"
+                :src="article.imageUrl"
+                :alt="article.title"
+                class="w-full h-96 object-cover"
+              />
+              <ImagePlaceholder v-else size="xlarge" />
 
-              <div class="p-8">
+              <!-- Article content -->
+              <div class="p-8 md:p-12">
                 <!-- Meta info -->
-                <div class="flex items-center gap-4 mb-3 text-sm text-gray-500">
+                <div class="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-500">
                   <time :datetime="article.createdAt">
-                    {{ formatDate(article.createdAt) }}
+                    {{ formatDateLong(article.createdAt) }}
                   </time>
-                  <span>{{ article.author }}</span>
+                  <span v-if="article.author">{{ article.author }}</span>
                   <span class="bg-atipicali-blue-light text-atipicali-blue px-2 py-1 rounded text-xs">
                     {{ article.readingTime }}
                   </span>
                 </div>
 
                 <!-- Title -->
-                <h2 class="text-3xl font-bold mb-3 text-gray-800 hover:text-atipicali-blue transition-colors">
+                <h2 class="text-4xl font-bold mb-4 text-gray-800">
                   {{ article.title }}
                 </h2>
 
-                <!-- Summary -->
-                <p class="text-gray-600 mb-6">{{ article.summary }}</p>
+                <!-- Summary/Excerpt -->
+                <p class="text-lg text-gray-600 mb-6 italic border-l-4 border-atipicali-blue pl-4">
+                  {{ article.summary }}
+                </p>
 
-                <!-- Read more button -->
-                <button
-                  @click="selectArticle(article)"
-                  class="text-atipicali-blue hover:text-atipicali-blue-dark font-semibold flex items-center gap-2 transition-colors"
-                >
-                  {{ $t('newsPage.readMore') }} →
-                </button>
+                <!-- Full HTML content -->
+                <div
+                  class="prose prose-lg max-w-none text-gray-800"
+                  v-html="sanitizedContent(article)"
+                ></div>
               </div>
             </article>
 
             <!-- Pagination -->
-            <div v-if="totalPages > 1" class="flex items-center justify-center gap-2 mt-8">
+            <div v-if="totalPages > 1" class="flex items-center justify-center gap-2">
               <button
                 @click="previousPage"
                 :disabled="currentPage === 1"
                 class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {{ $t('newsPage.previous') }}
+                ← {{ $t('newsPage.previous') }}
               </button>
 
               <div class="flex items-center gap-1">
@@ -112,123 +121,51 @@
                 :disabled="currentPage === totalPages"
                 class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {{ $t('newsPage.next') }}
+                {{ $t('newsPage.next') }} →
               </button>
+            </div>
+
+            <!-- No articles -->
+            <div v-if="allArticles.length === 0" class="bg-white rounded-lg shadow-md p-8 text-center">
+              <p class="text-gray-600">{{ $t('newsPage.noArticles') }}</p>
             </div>
           </div>
         </div>
 
-        <!-- Sidebar -->
+        <!-- Sidebar - Article Index -->
         <aside class="lg:col-span-1">
-          <!-- Sidebar title -->
-          <div class="bg-atipicali-blue text-white rounded-lg shadow-md p-6 mb-6">
-            <h3 class="text-xl font-bold">{{ $t('newsPage.allArticles') }}</h3>
-            <p class="text-atipicali-blue-light text-sm mt-1">
-              {{ totalArticles }} {{ $t('newsPage.articlesCount') }}
-            </p>
-          </div>
+          <!-- Sidebar card -->
+          <div class="bg-white rounded-lg shadow-md overflow-hidden sticky top-4 max-h-fit">
+            <!-- Header -->
+            <div class="bg-atipicali-blue text-white p-6">
+              <h3 class="text-lg font-bold">{{ $t('newsPage.allArticles') }}</h3>
+              <p class="text-atipicali-blue-light text-sm mt-2">
+                {{ totalArticles }} {{ $t('newsPage.articlesCount') }}
+              </p>
+            </div>
 
-          <!-- Articles sidebar list -->
-          <div
-            v-if="!loading && allArticles.length > 0"
-            class="bg-white rounded-lg shadow-md overflow-hidden sticky top-4"
-          >
-            <div class="max-h-96 overflow-y-auto">
+            <!-- Articles list -->
+            <div v-if="!loading && allArticles.length > 0" class="max-h-96 overflow-y-auto">
               <button
-                v-for="(article, index) in allArticles"
+                v-for="article in allArticles"
                 :key="article.id"
-                @click="selectArticle(article)"
+                @click="scrollToArticle(article.id)"
                 :class="[
-                  'w-full text-left px-6 py-4 border-b border-gray-200 hover:bg-gray-50 transition-colors',
-                  selectedArticle?.id === article.id && 'bg-atipicali-blue-light border-l-4 border-l-atipicali-blue'
+                  'w-full text-left px-6 py-4 border-b border-gray-200 hover:bg-atipicali-blue-light transition-colors',
+                  isCurrentArticle(article.id) && 'bg-atipicali-blue-light border-l-4 border-l-atipicali-blue'
                 ]"
               >
-                <p class="text-sm text-gray-500 mb-1">{{ formatDate(article.createdAt) }}</p>
-                <p class="font-semibold text-gray-800 line-clamp-2">{{ article.title }}</p>
-                <p class="text-xs text-gray-600 mt-2">{{ article.readingTime }}</p>
+                <p class="text-sm text-gray-500 mb-1">{{ formatDateShort(article.createdAt) }}</p>
+                <p class="font-semibold text-gray-800 line-clamp-2 text-sm">{{ article.title }}</p>
               </button>
             </div>
-          </div>
 
-          <!-- Empty state -->
-          <div v-else-if="!loading" class="bg-white rounded-lg shadow-md p-6 text-center">
-            <p class="text-gray-600">{{ $t('newsPage.noArticles') }}</p>
+            <!-- Empty state -->
+            <div v-else-if="!loading" class="p-6 text-center">
+              <p class="text-gray-600 text-sm">{{ $t('newsPage.noArticles') }}</p>
+            </div>
           </div>
         </aside>
-      </div>
-
-      <!-- Full article modal/view -->
-      <div v-if="selectedArticle" class="fixed inset-0 bg-black bg-opacity-50 z-50 overflow-y-auto">
-        <div class="min-h-screen flex items-center justify-center p-4">
-          <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-screen overflow-y-auto">
-            <!-- Header -->
-            <div class="sticky top-0 bg-white border-b border-gray-200 flex items-center justify-between p-6 z-10">
-              <h2 class="text-3xl font-bold text-gray-800 flex-1 pr-4">{{ selectedArticle.title }}</h2>
-              <button
-                @click="selectedArticle = null"
-                class="text-gray-500 hover:text-gray-700 text-2xl flex-shrink-0"
-              >
-                ×
-              </button>
-            </div>
-
-            <!-- Article meta -->
-            <div class="px-6 pt-6 pb-4 border-b border-gray-200 flex flex-wrap gap-4 text-sm text-gray-600">
-              <div class="flex items-center gap-2">
-                <span class="font-semibold">{{ $t('newsPage.author') }}:</span>
-                <span>{{ selectedArticle.author }}</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="font-semibold">{{ $t('newsPage.published') }}:</span>
-                <time :datetime="selectedArticle.createdAt">
-                  {{ formatDateLong(selectedArticle.createdAt) }}
-                </time>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="font-semibold">{{ $t('newsPage.readingTime') }}:</span>
-                <span>{{ selectedArticle.readingTime }}</span>
-              </div>
-            </div>
-
-            <!-- Article content -->
-            <div class="p-6 md:p-8">
-              <!-- Summary -->
-              <p class="text-lg text-gray-600 mb-6 italic border-l-4 border-atipicali-blue pl-4">
-                {{ selectedArticle.summary }}
-              </p>
-
-              <!-- HTML content -->
-              <div
-                class="prose prose-lg max-w-none text-gray-800"
-                v-html="sanitizedContent"
-              ></div>
-            </div>
-
-            <!-- Footer navigation -->
-            <div class="px-6 md:px-8 pb-6 border-t border-gray-200 flex justify-between">
-              <button
-                @click="previousArticle"
-                :disabled="!hasPreviousArticle"
-                class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                ← {{ $t('newsPage.previousArticle') }}
-              </button>
-              <button
-                @click="selectedArticle = null"
-                class="px-4 py-2 rounded-lg bg-atipicali-blue text-white hover:bg-atipicali-blue-dark transition-colors"
-              >
-                {{ $t('newsPage.backToList') }}
-              </button>
-              <button
-                @click="nextArticle"
-                :disabled="!hasNextArticle"
-                class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >
-                {{ $t('newsPage.nextArticle') }} →
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -246,16 +183,20 @@ const allArticles = ref([])
 const loading = ref(true)
 const error = ref(false)
 const currentPage = ref(1)
-const itemsPerPage = ref(5)
-const selectedArticle = ref(null)
+const itemsPerPage = ref(1)
+const activeArticleId = ref(null)
 
 const totalArticles = computed(() => allArticles.value.length)
 const totalPages = computed(() => Math.ceil(totalArticles.value / itemsPerPage.value))
 
-const paginatedArticles = computed(() => {
+const displayedArticles = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value
   const end = start + itemsPerPage.value
-  return allArticles.value.slice(start, end)
+  const articles = allArticles.value.slice(start, end)
+  if (articles.length > 0) {
+    activeArticleId.value = articles[0].id
+  }
+  return articles
 })
 
 const pageNumbers = computed(() => {
@@ -275,17 +216,10 @@ const pageNumbers = computed(() => {
   return pages
 })
 
-const sanitizedContent = computed(() => {
-  if (!selectedArticle.value) return ''
-  return DOMPurify.sanitize(selectedArticle.value.content)
-})
-
-const selectedArticleIndex = computed(() => {
-  return allArticles.value.findIndex(a => a.id === selectedArticle.value?.id)
-})
-
-const hasPreviousArticle = computed(() => selectedArticleIndex.value > 0)
-const hasNextArticle = computed(() => selectedArticleIndex.value < allArticles.value.length - 1)
+const sanitizedContent = (article) => {
+  if (!article || !article.content) return ''
+  return DOMPurify.sanitize(article.content)
+}
 
 const fetchNews = async () => {
   loading.value = true
@@ -302,15 +236,6 @@ const fetchNews = async () => {
   }
 }
 
-const formatDate = (dateString) => {
-  const date = new Date(dateString)
-  return date.toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  })
-}
-
 const formatDateLong = (dateString) => {
   const date = new Date(dateString)
   return date.toLocaleDateString(undefined, {
@@ -320,54 +245,47 @@ const formatDateLong = (dateString) => {
   })
 }
 
-const selectArticle = (article) => {
-  selectedArticle.value = article
+const formatDateShort = (dateString) => {
+  const date = new Date(dateString)
+  return date.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  })
+}
+
+const scrollToArticle = (articleId) => {
+  const element = document.getElementById(`article-${articleId}`)
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+  // Update current page to show the article
+  const index = allArticles.value.findIndex(a => a.id === articleId)
+  if (index !== -1) {
+    currentPage.value = Math.floor(index / itemsPerPage.value) + 1
+  }
+}
+
+const isCurrentArticle = (articleId) => {
+  return activeArticleId.value === articleId
 }
 
 const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
 
 const previousPage = () => {
   if (currentPage.value > 1) {
     currentPage.value--
-  }
-}
-
-const nextArticle = () => {
-  if (hasNextArticle.value) {
-    selectedArticle.value = allArticles.value[selectedArticleIndex.value + 1]
-  }
-}
-
-const previousArticle = () => {
-  if (hasPreviousArticle.value) {
-    selectedArticle.value = allArticles.value[selectedArticleIndex.value - 1]
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 }
 
 onMounted(async () => {
   await fetchNews()
-  
-  // Check if an article ID was passed via query parameter
-  if (route.query.articleId) {
-    const article = allArticles.value.find(a => a.id === route.query.articleId)
-    if (article) {
-      selectedArticle.value = article
-    }
-  }
-})
-
-// Watch for route changes to handle the article ID query parameter
-watch(() => route.query.articleId, (newArticleId) => {
-  if (newArticleId) {
-    const article = allArticles.value.find(a => a.id === newArticleId)
-    if (article) {
-      selectedArticle.value = article
-    }
-  }
 })
 </script>
 
