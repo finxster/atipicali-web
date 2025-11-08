@@ -48,13 +48,6 @@
             {{ $t('login.register') }}
           </router-link>
         </p>
-
-        <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <p class="text-sm text-gray-700">
-            <strong>Note:</strong> This is a UI-only page. Connect to POST /api/auth/login 
-            when the backend authentication endpoint is ready.
-          </p>
-        </div>
       </div>
     </div>
     <Footer />

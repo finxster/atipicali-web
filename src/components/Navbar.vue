@@ -203,30 +203,40 @@
             </div>
           </template>
           <template v-else>
-            <router-link to="/register" class="hidden sm:block text-atipicali-blue hover:text-atipicali-blue-dark font-semibold">
+            <button @click="showAuthModal = true; authModalMode = 'register'" class="hidden sm:block text-atipicali-blue hover:text-atipicali-blue-dark font-semibold">
               {{ $t('navbar.register') }}
-            </router-link>
-            <router-link to="/login" class="btn-primary py-2 px-4">
+            </button>
+            <button @click="showAuthModal = true; authModalMode = 'login'" class="btn-primary py-2 px-4">
               {{ $t('navbar.login') }}
-            </router-link>
+            </button>
           </template>
         </div>
       </div>
     </div>
+
+    <!-- Auth Modal -->
+    <AuthModal
+      :isOpen="showAuthModal"
+      :initialMode="authModalMode"
+      @close="showAuthModal = false"
+      @success="onAuthSuccess"
+    />
   </nav>
 </template>
 
 <script setup>
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { setLocale } from '../i18n'
 import { useAuthStore } from '../stores/auth'
 import { useLocationStore } from '../stores/location'
 import { placeAPI } from '../services/api'
+import AuthModal from './AuthModal.vue'
 
 const { locale, t } = useI18n()
 const router = useRouter()
+const route = useRoute()
 const authStore = useAuthStore()
 const locationStore = useLocationStore()
 
@@ -242,6 +252,26 @@ const avatarLetter = computed(() => {
   if (!u) return '?'
   const source = u.name || u.email || ''
   return source ? source.charAt(0).toUpperCase() : '?'
+})
+
+// Auth Modal state
+const showAuthModal = ref(false)
+const authModalMode = ref('login')
+
+const onAuthSuccess = () => {
+  showAuthModal.value = false
+  // Refresh page to update navbar
+  router.go(0)
+}
+
+// Watch for openLogin query parameter and open auth modal
+watch(() => route.query.openLogin, (newVal) => {
+  if (newVal === 'true') {
+    showAuthModal.value = true
+    authModalMode.value = 'login'
+    // Remove the query parameter after opening the modal
+    router.replace({ query: {} })
+  }
 })
 
 // Search form state

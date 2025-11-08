@@ -5,6 +5,9 @@ import AddPlace from '../pages/AddPlace.vue'
 import PlaceSubmitted from '../pages/PlaceSubmitted.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
+import AuthRequired from '../pages/AuthRequired.vue'
+import VerifyEmail from '../pages/VerifyEmail.vue'
+import VerifyEmailToken from '../pages/VerifyEmailToken.vue'
 import NewsPage from '../pages/NewsPage.vue'
 import SearchResults from '../pages/SearchResults.vue'
 import About from '../pages/About.vue'
@@ -42,6 +45,21 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/auth-required',
+    name: 'AuthRequired',
+    component: AuthRequired
+  },
+  {
+    path: '/verify-email',
+    name: 'VerifyEmail',
+    component: VerifyEmail
+  },
+  {
+    path: '/verify',
+    name: 'VerifyEmailToken',
+    component: VerifyEmailToken
   },
   {
     path: '/news',
@@ -93,8 +111,8 @@ router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('atipicali_token')
   const requiresAuth = to.name === 'AddPlace'
   if (requiresAuth && !token) {
-    // redirect to login and keep the intended route in the query
-    next({ name: 'Login', query: { redirect: to.fullPath } })
+    // redirect to auth-required page and keep the intended route in the query
+    next({ name: 'AuthRequired', query: { redirect: to.fullPath } })
   } else {
     next()
   }

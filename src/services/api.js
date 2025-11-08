@@ -47,6 +47,12 @@ export const placeAPI = {
   getServiceTypes: () => api.get('/api/public/service-types')
 }
 
+// Auth API methods
+export const authAPI = {
+  login: (email, password) => api.post('/api/auth/login', { email, password }),
+  register: (name, email, password) => api.post('/api/auth/register', { name, email, password })
+}
+
 // Contact API methods
 export const contactAPI = {
   sendContactEmail: (data) => api.post('/api/public/contact/send-email', data)

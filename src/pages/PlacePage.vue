@@ -167,16 +167,16 @@
 
                 <h3 class="text-xl font-semibold mb-6 text-gray-800">{{ $t('placePage.shareYourExperience') }}</h3>
 
-                <!-- Login prompt -->
-                <div v-if="!isAuthenticated" class="text-center py-8">
-                  <p class="text-gray-600 mb-4">{{ $t('placePage.loginToReview') }}</p>
-                  <router-link
-                    to="/login"
-                    class="inline-block px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-                  >
-                    {{ $t('navbar.login') }}
-                  </router-link>
-                </div>
+              <!-- Login prompt -->
+              <div v-if="!isAuthenticated" class="text-center py-8">
+                <p class="text-gray-600 mb-4">{{ $t('placePage.loginToReview') }}</p>
+                <button
+                  @click="redirectToAuth"
+                  class="inline-block px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  {{ $t('navbar.login') }}
+                </button>
+              </div>
 
                 <!-- Review form -->
                 <form v-else @submit.prevent="submitReview" class="space-y-4">
@@ -398,6 +398,8 @@ const isPortuguese = computed(() => locale.value === 'pt')
 
 const isDismissed = ref(false)
 
+const userSubmittedReview = ref(false)
+
 const currentUserId = computed(() => {
   return authStore.user?.id || authStore.user?.userId || authStore.user?.email
 })
@@ -435,8 +437,6 @@ const userHasReviewed = computed(() => {
   
   return hasReview
 })
-
-const userSubmittedReview = ref(false)
 
 const averageRating = computed(() => {
   if (reviews.value.length === 0) return 0
@@ -534,6 +534,18 @@ const getSocialLink = (platform, account) => {
     'YOUTUBE': `https://youtube.com/@${account}`
   }
   return links[platform] || '#'
+}
+
+const onAuthSuccess = () => {
+  // Modal will close on success - just ensure form is ready
+  isDismissed.value = false
+}
+
+const redirectToAuth = () => {
+  router.push({
+    name: 'AuthRequired',
+    query: { redirect: route.fullPath }
+  })
 }
 
 onMounted(() => {

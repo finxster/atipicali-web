@@ -14,6 +14,7 @@
               type="text" 
               class="input-field"
               required
+              :disabled="loading"
             />
           </div>
 
@@ -26,6 +27,7 @@
               type="email" 
               class="input-field"
               required
+              :disabled="loading"
             />
           </div>
 
@@ -38,6 +40,7 @@
               type="password" 
               class="input-field"
               required
+              :disabled="loading"
             />
           </div>
 
@@ -50,13 +53,19 @@
               type="password" 
               class="input-field"
               required
+              :disabled="loading"
             />
           </div>
 
-          <button type="submit" class="btn-primary w-full">
-            {{ $t('register.submit') }}
+          <button type="submit" class="btn-primary w-full" :disabled="loading">
+            <span v-if="loading">{{ $t('register.loading') }}</span>
+            <span v-else>{{ $t('register.submit') }}</span>
           </button>
         </form>
+
+        <div v-if="error" class="mt-4 text-center text-red-600">
+          {{ error }}
+        </div>
 
         <p class="mt-6 text-center text-gray-600">
           {{ $t('register.hasAccount') }}
@@ -64,13 +73,6 @@
             {{ $t('register.login') }}
           </router-link>
         </p>
-
-        <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <p class="text-sm text-gray-700">
-            <strong>Note:</strong> This is a UI-only page. Connect to POST /api/auth/register 
-            when the backend authentication endpoint is ready.
-          </p>
-        </div>
       </div>
     </div>
     <Footer />
@@ -80,9 +82,12 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
 import Footer from '../components/Footer.vue'
+import api from '../utils/axios'
 
 const router = useRouter()
+const authStore = useAuthStore()
 
 const formData = ref({
   name: '',
@@ -91,13 +96,68 @@ const formData = ref({
   confirmPassword: ''
 })
 
-const handleRegister = () => {
-  if (formData.value.password !== formData.value.confirmPassword) {
-    alert('Passwords do not match!')
+const loading = ref(false)
+const error = ref(null)
+
+const validateEmail = (email) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return regex.test(email)
+}
+
+const handleRegister = async () => {
+  error.value = null
+
+  // Validation
+  if (!formData.value.name.trim()) {
+    error.value = 'Name is required'
     return
   }
-  
-  console.log('Register attempt:', formData.value)
-  alert('Registration UI ready. Connect to authentication endpoint when backend is available.')
+
+  if (!formData.value.email.trim()) {
+    error.value = 'Email is required'
+    return
+  }
+
+  if (!validateEmail(formData.value.email)) {
+    error.value = 'Please enter a valid email'
+    return
+  }
+
+  if (!formData.value.password) {
+    error.value = 'Password is required'
+    return
+  }
+
+  if (formData.value.password.length < 6) {
+    error.value = 'Password must be at least 6 characters'
+    return
+  }
+
+  if (formData.value.password !== formData.value.confirmPassword) {
+    error.value = 'Passwords do not match'
+    return
+  }
+
+  loading.value = true
+
+  try {
+    const response = await api.post('/api/auth/register', {
+      name: formData.value.name,
+      email: formData.value.email,
+      password: formData.value.password
+    })
+
+    const { token, email: userEmail, name } = response.data
+    authStore.setToken(token)
+    authStore.setUser({ email: userEmail, name })
+
+    // Redirect to home after successful registration
+    router.push('/')
+  } catch (err) {
+    console.error('Register error:', err)
+    error.value = err.response?.data?.message || 'Failed to register. Please try again.'
+  } finally {
+    loading.value = false
+  }
 }
 </script>

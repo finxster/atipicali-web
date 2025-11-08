@@ -71,7 +71,7 @@
                 <input 
                   v-model="form.email"
                   type="email" 
-                  :placeholder="$t('contact.formEmailPlaceholder')"
+                  placeholder="contato@atipicali.com"
                   class="input-field"
                   required
                 />
@@ -91,19 +91,26 @@
 
               <!-- Message -->
               <div>
-                <label class="block text-gray-700 font-semibold mb-2">{{ $t('contact.formMessage') }}</label>
+                <div class="flex items-center justify-between mb-2">
+                  <label class="block text-gray-700 font-semibold">{{ $t('contact.formMessage') }}</label>
+                  <span class="text-sm" :class="messageValid ? 'text-green-600' : messageLength > 0 ? 'text-red-600' : 'text-gray-500'">
+                    {{ messageLength }}/{{ MAX_MESSAGE_LENGTH }}
+                  </span>
+                </div>
                 <textarea 
                   v-model="form.message"
                   :placeholder="$t('contact.formMessagePlaceholder')"
                   class="input-field min-h-32 resize-none"
+                  :class="{ 'border-red-500': messageLength > 0 && !messageValid }"
                   required
                 ></textarea>
+                <p v-if="messageError" class="mt-2 text-sm text-red-600">{{ messageError }}</p>
               </div>
 
               <!-- Submit Button -->
               <button 
                 type="submit"
-                :disabled="isSubmitting"
+                :disabled="isSubmitting || (form.message.length > 0 && !messageValid)"
                 class="btn-primary w-full"
               >
                 {{ isSubmitting ? $t('contact.sending') : $t('contact.sendMessage') }}
@@ -150,9 +157,31 @@ const isSubmitting = ref(false)
 const submitSuccess = ref(false)
 const submitError = ref(null)
 
+// Message validation constants
+const MIN_MESSAGE_LENGTH = 10
+const MAX_MESSAGE_LENGTH = 2000
+
 // Display language-specific email
 const contactEmail = computed(() => {
   return locale.value === 'pt' ? 'contato@atipicali.com' : 'hello@atipicali.com'
+})
+
+// Message validation
+const messageLength = computed(() => form.value.message.length)
+const messageValid = computed(() => messageLength.value >= MIN_MESSAGE_LENGTH && messageLength.value <= MAX_MESSAGE_LENGTH)
+const messageError = computed(() => {
+  if (messageLength.value === 0) return null
+  if (messageLength.value < MIN_MESSAGE_LENGTH) {
+    return locale.value === 'pt' 
+      ? `Mensagem deve ter pelo menos ${MIN_MESSAGE_LENGTH} caracteres (${messageLength.value}/${MIN_MESSAGE_LENGTH})`
+      : `Message must be at least ${MIN_MESSAGE_LENGTH} characters (${messageLength.value}/${MIN_MESSAGE_LENGTH})`
+  }
+  if (messageLength.value > MAX_MESSAGE_LENGTH) {
+    return locale.value === 'pt'
+      ? `Mensagem não pode exceder ${MAX_MESSAGE_LENGTH} caracteres (${messageLength.value}/${MAX_MESSAGE_LENGTH})`
+      : `Message cannot exceed ${MAX_MESSAGE_LENGTH} characters (${messageLength.value}/${MAX_MESSAGE_LENGTH})`
+  }
+  return null
 })
 
 // Map locale to backend language format
@@ -161,6 +190,12 @@ const getBackendLanguage = () => {
 }
 
 const submitForm = async () => {
+  // Validate message length before submitting
+  if (!messageValid.value) {
+    submitError.value = messageError.value
+    return
+  }
+
   isSubmitting.value = true
   submitError.value = null
   submitSuccess.value = false
