@@ -13,7 +13,7 @@
         {{ $t('hero.description') }}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button class="btn-primary text-lg">
+        <button @click="handleSearchClick" class="btn-primary text-lg">
           {{ $t('hero.searchPlaces') }}
         </button>
         <router-link to="/add-place" class="btn-secondary text-lg">
@@ -25,4 +25,58 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const userLocation = ref(null)
+
+// Get user's current location on mount
+onMounted(() => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        userLocation.value = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          name: 'Current Location'
+        }
+      },
+      (error) => {
+        console.log('Geolocation error:', error)
+        // Set default location (Lisbon, Portugal) if geolocation fails
+        userLocation.value = {
+          latitude: 38.7223,
+          longitude: -9.1393,
+          name: 'Lisboa, Portugal'
+        }
+      }
+    )
+  } else {
+    // Set default location if geolocation is not supported
+    userLocation.value = {
+      latitude: 38.7223,
+      longitude: -9.1393,
+      name: 'Lisboa, Portugal'
+    }
+  }
+})
+
+const handleSearchClick = () => {
+  // Navigate to search results with user's location
+  const queryParams = {
+    from: 'search'
+  }
+
+  if (userLocation.value) {
+    queryParams.latitude = userLocation.value.latitude
+    queryParams.longitude = userLocation.value.longitude
+    queryParams.locationName = userLocation.value.name
+  }
+
+  router.push({
+    name: 'SearchResults',
+    query: queryParams
+  })
+}
 </script>

@@ -44,7 +44,9 @@ export const placeAPI = {
   // Search places with advanced filters using POST endpoint
   searchPlaces: (payload) => api.post('/api/public/places/search', payload),
   // Get all available service types
-  getServiceTypes: () => api.get('/api/public/service-types')
+  getServiceTypes: () => api.get('/api/public/service-types'),
+  // Submit a new place
+  submitPlace: (data) => api.post('/api/places', data)
 }
 
 // Auth API methods

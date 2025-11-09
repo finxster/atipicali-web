@@ -155,24 +155,48 @@
 
         <!-- rating removed per backend change -->
 
-        <!-- Contact Info (Phone) -->
+        <!-- Contact Information -->
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">
             {{ t('places.addPlace.contactInfo') }}
             <span class="text-gray-400 text-xs font-normal ml-1">{{ t('places.addPlace.optional') }}</span>
           </label>
-          <input v-model="formData.contactInfo" type="tel" :placeholder="t('places.addPlace.contactInfoPlaceholder')" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-atipical-blue focus:border-transparent transition-all" />
+          <div class="space-y-3">
+            <div v-for="(contact, index) in formData.contactInfo" :key="index" class="flex items-start space-x-2">
+              <select v-model="contact.type" class="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-atipical-blue focus:border-transparent transition-all">
+                <option value="PHONE">{{ t('places.addPlace.contactTypes.phone') || 'Phone' }}</option>
+                <option value="EMAIL">{{ t('places.addPlace.contactTypes.email') || 'Email' }}</option>
+                <option value="WHATSAPP">{{ t('places.addPlace.contactTypes.whatsapp') || 'WhatsApp' }}</option>
+                <option value="SITE">{{ t('places.addPlace.contactTypes.site') || 'Website' }}</option>
+              </select>
+              <div class="flex-1">
+                <input 
+                  v-model="contact.contactValue" 
+                  :type="contact.type === 'EMAIL' ? 'email' : contact.type === 'SITE' ? 'url' : 'text'"
+                  :placeholder="contact.type === 'PHONE' ? '+351 123 456 789' : contact.type === 'EMAIL' ? 'email@example.com' : contact.type === 'WHATSAPP' ? '+351 123 456 789' : 'https://example.com'"
+                  class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-atipical-blue focus:border-transparent transition-all" 
+                />
+              </div>
+              <label class="flex items-center px-3 py-2.5 cursor-pointer" :title="t('places.addPlace.primaryContact') || 'Primary'">
+                <input 
+                  type="radio" 
+                  :name="'primary-contact'"
+                  :checked="contact.isPrimary"
+                  @change="setContactAsPrimary(index)"
+                  class="mr-2"
+                />
+                <span class="text-xs text-gray-600">{{ t('places.addPlace.primary') || 'Primary' }}</span>
+              </label>
+              <button type="button" @click="removeContactInfo(index)" class="p-2.5 text-red-600 hover:bg-red-50 rounded-lg transition-colors" :title="t('places.addPlace.removeContact') || 'Remove'">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+              </button>
+            </div>
+            <button type="button" @click="addContactInfo" class="w-full px-4 py-2.5 border-2 border-dashed border-gray-300 text-gray-600 rounded-lg hover:border-blue-600 hover:text-blue-600 transition-colors flex items-center justify-center space-x-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+              <span>{{ t('places.addPlace.addContact') || 'Add contact method' }}</span>
+            </button>
+          </div>
           <p class="mt-1 text-xs text-gray-500">{{ t('places.addPlace.contactInfoHint') }}</p>
-        </div>
-
-        <!-- Website -->
-        <div>
-          <label class="block text-sm font-semibold text-gray-700 mb-2">
-            {{ t('places.addPlace.site') }}
-            <span class="text-gray-400 text-xs font-normal ml-1">{{ t('places.addPlace.optional') }}</span>
-          </label>
-          <input v-model="formData.site" type="url" :placeholder="t('places.addPlace.sitePlaceholder')" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-atipical-blue focus:border-transparent transition-all" :class="{ 'border-red-500': errors.site }" />
-          <p v-if="errors.site" class="mt-1 text-sm text-red-600">{{ errors.site }}</p>
         </div>
 
         <!-- Social Links -->
@@ -279,8 +303,7 @@ const formData = ref({
   latitude: 0,
   longitude: 0,
   imageUrl: '',
-  contactInfo: '',
-  site: '',
+  contactInfo: [],
   socialLinks: [],
   serviceTypes: []
 })
@@ -354,6 +377,31 @@ const addSocialLink = () => {
 // Remove social link
 const removeSocialLink = (index) => {
   formData.value.socialLinks.splice(index, 1)
+}
+
+// Add contact info
+const addContactInfo = () => {
+  formData.value.contactInfo.push({
+    type: 'PHONE',
+    contactValue: '',
+    isPrimary: formData.value.contactInfo.length === 0
+  })
+}
+
+// Remove contact info
+const removeContactInfo = (index) => {
+  formData.value.contactInfo.splice(index, 1)
+  // If we removed the primary one, make the first one primary
+  if (formData.value.contactInfo.length > 0 && !formData.value.contactInfo.some(c => c.isPrimary)) {
+    formData.value.contactInfo[0].isPrimary = true
+  }
+}
+
+// Set contact info as primary
+const setContactAsPrimary = (index) => {
+  formData.value.contactInfo.forEach((contact, i) => {
+    contact.isPrimary = i === index
+  })
 }
 
 // Add service type
@@ -533,10 +581,20 @@ const handleSubmit = async () => {
       address: formData.value.address.trim(),
       latitude: formData.value.latitude,
       longitude: formData.value.longitude,
-    imageUrl: formData.value.imageUrl.trim(),
-      contactInfo: formData.value.contactInfo.trim(),
-      site: formData.value.site.trim(),
-      socialLinks: formData.value.socialLinks.filter(link => link.account.trim() !== '').map(link => ({ platform: link.platform, account: link.account.trim() })),
+      imageUrl: formData.value.imageUrl.trim(),
+      contactInfo: formData.value.contactInfo
+        .filter(contact => contact.contactValue.trim() !== '')
+        .map(contact => ({
+          type: contact.type,
+          contactValue: contact.contactValue.trim(),
+          isPrimary: contact.isPrimary
+        })),
+      socialLinks: formData.value.socialLinks
+        .filter(link => link.account.trim() !== '')
+        .map(link => ({ 
+          platform: link.platform, 
+          account: link.account.trim() 
+        })),
       serviceTypes: formData.value.serviceTypes
     }
     const response = await apiClient.post('/api/places', payload)
@@ -554,7 +612,7 @@ const handleSubmit = async () => {
 
 // Reset form
 const resetForm = () => {
-  formData.value = { name: '', description: '', address: '', latitude: 0, longitude: 0, imageUrl: '', contactInfo: '', site: '', socialLinks: [], serviceTypes: [] }
+  formData.value = { name: '', description: '', address: '', latitude: 0, longitude: 0, imageUrl: '', contactInfo: [], socialLinks: [], serviceTypes: [] }
   errors.value = {}
   imagePreview.value = null
   imageLoadError.value = false
