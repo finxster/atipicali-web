@@ -556,7 +556,7 @@ const fetchLocationSuggestions = async (query) => {
 
   try {
     const encodedQuery = encodeURIComponent(query)
-    const googleApiUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodedQuery}&types=address`
+    const googleApiUrl = `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${encodedQuery}`
     const proxyUrl = `https://atipicali.com/maps-proxy/?url=${encodeURIComponent(googleApiUrl)}`
     const response = await fetch(proxyUrl)
     const data = await response.json()
