@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "AtipicALI - Neurodivergent-Friendly Places Map",
+    "description": "Discover, share, and rate neurodivergent-friendly places and services with AtipicALI.",
+    "fullDescription": "Discover and share neurodivergent-friendly places and services. See reviews, comments, and more!"
+  },
   "common": {
     "close": "Close"
   },

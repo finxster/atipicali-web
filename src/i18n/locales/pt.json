@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "AtipicALI - Mapa de lugares e serviços para neurodivergentes",
+    "description": "Descubra, compartilhe e avalie lugares e serviços para neurodivergentes com o AtipicALI.",
+    "fullDescription": "Descubra e compartilhe lugares e serviços amigáveis para neurodivergentes. Veja avaliações, comentários e muito mais!"
+  },
   "common": {
     "close": "Fechar"
   },
