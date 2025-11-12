@@ -79,14 +79,21 @@
 
               <!-- Subject -->
               <div>
-                <label class="block text-gray-700 font-semibold mb-2">{{ $t('contact.formSubject') }}</label>
+                <div class="flex items-center justify-between mb-2">
+                  <label class="block text-gray-700 font-semibold">{{ $t('contact.formSubject') }}</label>
+                  <span class="text-sm" :class="subjectValid ? 'text-green-600' : subjectLength > 0 ? 'text-red-600' : 'text-gray-500'">
+                    {{ subjectLength }}/{{ MAX_SUBJECT_LENGTH }}
+                  </span>
+                </div>
                 <input 
                   v-model="form.subject"
                   type="text" 
                   :placeholder="$t('contact.formSubjectPlaceholder')"
                   class="input-field"
+                  :class="{ 'border-red-500': subjectLength > 0 && !subjectValid }"
                   required
                 />
+                <p v-if="subjectError" class="mt-2 text-sm text-red-600">{{ subjectError }}</p>
               </div>
 
               <!-- Message -->
@@ -110,7 +117,7 @@
               <!-- Submit Button -->
               <button 
                 type="submit"
-                :disabled="isSubmitting || (form.message.length > 0 && !messageValid)"
+                :disabled="isSubmitting || (form.message.length > 0 && !messageValid) || (form.subject.length > 0 && !subjectValid)"
                 class="btn-primary w-full"
               >
                 {{ isSubmitting ? $t('contact.sending') : $t('contact.sendMessage') }}
@@ -161,6 +168,10 @@ const submitError = ref(null)
 const MIN_MESSAGE_LENGTH = 10
 const MAX_MESSAGE_LENGTH = 2000
 
+// Subject validation constants
+const MIN_SUBJECT_LENGTH = 5
+const MAX_SUBJECT_LENGTH = 200
+
 // Display language-specific email
 const contactEmail = computed(() => {
   return locale.value === 'pt' ? 'contato@atipicali.com' : 'hello@atipicali.com'
@@ -184,6 +195,24 @@ const messageError = computed(() => {
   return null
 })
 
+// Subject validation
+const subjectLength = computed(() => form.value.subject.length)
+const subjectValid = computed(() => subjectLength.value >= MIN_SUBJECT_LENGTH && subjectLength.value <= MAX_SUBJECT_LENGTH)
+const subjectError = computed(() => {
+  if (subjectLength.value === 0) return null
+  if (subjectLength.value < MIN_SUBJECT_LENGTH) {
+    return locale.value === 'pt' 
+      ? `Assunto deve ter pelo menos ${MIN_SUBJECT_LENGTH} caracteres (${subjectLength.value}/${MIN_SUBJECT_LENGTH})`
+      : `Subject must be at least ${MIN_SUBJECT_LENGTH} characters (${subjectLength.value}/${MIN_SUBJECT_LENGTH})`
+  }
+  if (subjectLength.value > MAX_SUBJECT_LENGTH) {
+    return locale.value === 'pt'
+      ? `Assunto não pode exceder ${MAX_SUBJECT_LENGTH} caracteres (${subjectLength.value}/${MAX_SUBJECT_LENGTH})`
+      : `Subject cannot exceed ${MAX_SUBJECT_LENGTH} characters (${subjectLength.value}/${MAX_SUBJECT_LENGTH})`
+  }
+  return null
+})
+
 // Map locale to backend language format
 const getBackendLanguage = () => {
   return locale.value === 'pt' ? 'pt-br' : 'en'
@@ -193,6 +222,12 @@ const submitForm = async () => {
   // Validate message length before submitting
   if (!messageValid.value) {
     submitError.value = messageError.value
+    return
+  }
+
+  // Validate subject length before submitting
+  if (!subjectValid.value) {
+    submitError.value = subjectError.value
     return
   }
 
