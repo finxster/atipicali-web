@@ -1,0 +1,123 @@
+/**
+ * Google Analytics 4 Plugin Configuration
+ * 
+ * This plugin configures GA4 for the application with the following features:
+ * - Only tracks in production (localhost/development tracking is disabled)
+ * - Automatic pageview tracking on route changes
+ * - Custom event tracking support
+ * - Environment-based configuration
+ * 
+ * Environment Variables Required:
+ * - VITE_GA_MEASUREMENT_ID: Your GA4 Measurement ID (format: G-XXXXXXXXXX)
+ */
+
+import VueGtag from 'vue-gtag-next'
+
+/**
+ * Determines if analytics should be enabled
+ * Analytics is only enabled in production environments
+ * 
+ * @returns {boolean} True if analytics should be enabled
+ */
+const isProduction = () => {
+  // Check if we're in production mode
+  const isProd = import.meta.env.PROD
+  
+  // Check if we're NOT on localhost
+  const isNotLocalhost = !window.location.hostname.includes('localhost') && 
+                         !window.location.hostname.includes('127.0.0.1')
+  
+  return isProd && isNotLocalhost
+}
+
+/**
+ * Gets the GA4 Measurement ID from environment variables
+ * 
+ * @returns {string|null} The Measurement ID or null if not configured
+ */
+const getMeasurementId = () => {
+  return import.meta.env.VITE_GA_MEASUREMENT_ID || null
+}
+
+/**
+ * Install and configure Google Analytics 4
+ * 
+ * @param {Object} app - Vue application instance
+ * @param {Object} router - Vue Router instance
+ */
+export const setupAnalytics = (app, router) => {
+  const measurementId = getMeasurementId()
+  
+  // Validate Measurement ID
+  if (!measurementId) {
+    console.warn('⚠️ Google Analytics: VITE_GA_MEASUREMENT_ID is not configured in environment variables')
+    return
+  }
+
+  // Check if Measurement ID is still the placeholder
+  if (measurementId === 'G-XXXXXXXXXX') {
+    console.warn('⚠️ Google Analytics: Please replace the placeholder Measurement ID with your actual GA4 ID')
+    return
+  }
+
+  const enabled = isProduction()
+  
+  // Log configuration status (only in development)
+  if (import.meta.env.DEV) {
+    if (!enabled) {
+      console.log('📊 Google Analytics: Disabled (not in production environment)')
+    } else {
+      console.log('📊 Google Analytics: Enabled')
+    }
+  }
+
+  // Configure and install GA4
+  app.use(VueGtag, {
+    // GA4 Measurement ID
+    property: {
+      id: measurementId,
+      params: {
+        // Send page views automatically on route change
+        send_page_view: true,
+        // Cookie settings
+        cookie_flags: 'SameSite=None;Secure',
+      }
+    },
+    
+    // Enable/disable based on environment
+    enabled,
+    
+    // Bootstrap with config (immediately initialize)
+    bootstrap: enabled,
+    
+    // Disable on localhost and development
+    disableScriptLoad: !enabled,
+    
+    // Additional configuration
+    config: {
+      // Custom parameters
+      custom_map: {
+        dimension1: 'user_type',
+        dimension2: 'page_category'
+      },
+      
+      // Anonymize IP addresses for privacy compliance
+      anonymize_ip: true,
+      
+      // Cookie settings
+      cookie_domain: 'auto',
+      cookie_expires: 63072000, // 2 years in seconds
+      
+      // Debug mode (only in development)
+      debug_mode: import.meta.env.DEV
+    }
+  }, router)
+}
+
+/**
+ * Export helper to check if analytics is enabled
+ * Useful for conditional tracking logic
+ */
+export const isAnalyticsEnabled = isProduction
+
+export default setupAnalytics
