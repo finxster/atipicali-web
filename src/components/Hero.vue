@@ -6,17 +6,17 @@
     <div class="absolute inset-0 bg-black bg-opacity-50"></div>
     
     <div class="relative z-10 text-center px-4 max-w-4xl">
-      <h1 class="text-5xl md:text-6xl font-bold mb-6">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
         {{ $t('hero.title') }}
       </h1>
-      <p class="text-xl md:text-2xl mb-8 text-gray-200">
+      <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 text-gray-200">
         {{ $t('hero.description') }}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <button @click="handleSearchClick" class="btn-primary text-lg">
+        <button @click="handleSearchClick" class="btn-primary text-base md:text-lg">
           {{ $t('hero.searchPlaces') }}
         </button>
-        <router-link to="/add-place" class="btn-secondary text-lg">
+        <router-link to="/add-place" class="btn-secondary text-base md:text-lg">
           {{ $t('hero.addPlace') }}
         </router-link>
       </div>
