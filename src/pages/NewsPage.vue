@@ -173,12 +173,13 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import api from '../utils/axios'
 import DOMPurify from 'dompurify'
 import ImagePlaceholder from '../components/ImagePlaceholder.vue'
 
 const route = useRoute()
+const router = useRouter()
 const allArticles = ref([])
 const loading = ref(true)
 const error = ref(false)
@@ -227,12 +228,27 @@ const fetchNews = async () => {
   try {
     const { data } = await api.get('/api/public/news')
     allArticles.value = Array.isArray(data) ? data : []
+    
+    // After fetching, check if we need to navigate to a specific article
+    const articleId = route.query.articleId
+    if (articleId && allArticles.value.length > 0) {
+      navigateToArticle(articleId)
+    }
   } catch (e) {
     console.error('Error fetching news:', e)
     error.value = true
     allArticles.value = []
   } finally {
     loading.value = false
+  }
+}
+
+const navigateToArticle = (articleId) => {
+  // Find the article index - handle both string and number IDs
+  const index = allArticles.value.findIndex(a => a.id == articleId)
+  if (index !== -1) {
+    // Set the page to show this article (pages are 1-indexed)
+    currentPage.value = Math.floor(index / itemsPerPage.value) + 1
   }
 }
 
@@ -263,6 +279,12 @@ const scrollToArticle = (articleId) => {
   const index = allArticles.value.findIndex(a => a.id === articleId)
   if (index !== -1) {
     currentPage.value = Math.floor(index / itemsPerPage.value) + 1
+    
+    // Update URL with the article ID
+    router.push({
+      name: 'NewsPage',
+      query: { articleId: articleId }
+    })
   }
 }
 
@@ -286,6 +308,13 @@ const previousPage = () => {
 
 onMounted(async () => {
   await fetchNews()
+})
+
+// Watch for route query changes (when clicking from sidebar)
+watch(() => route.query.articleId, (newArticleId) => {
+  if (newArticleId && allArticles.value.length > 0) {
+    navigateToArticle(newArticleId)
+  }
 })
 </script>
 
