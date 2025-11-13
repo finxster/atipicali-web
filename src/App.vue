@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="min-h-screen flex flex-col">
+  <div id="app" class="min-h-screen flex flex-col overflow-x-hidden">
     <Navbar />
     <router-view />
     <CookieBanner />

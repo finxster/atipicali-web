@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent horizontal scrolling on mobile */
+html, body {
+  @apply overflow-x-hidden;
+  max-width: 100%;
+}
+
 /* Global styles */
 body {
   @apply font-sans antialiased;

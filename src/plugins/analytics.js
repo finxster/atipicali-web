@@ -39,14 +39,25 @@ const hasUserConsent = () => {
  * @returns {boolean} True if analytics should be enabled
  */
 const isProduction = () => {
-  // Check if we're in production mode
+  // Check if we're in production mode (Vite build)
   const isProd = import.meta.env.PROD
   
-  // Check if we're NOT on localhost
-  const isNotLocalhost = !window.location.hostname.includes('localhost') && 
-                         !window.location.hostname.includes('127.0.0.1')
+  // Check if we're NOT on localhost or development domains
+  const hostname = window.location.hostname
+  const isNotLocalhost = hostname !== 'localhost' && 
+                         hostname !== '127.0.0.1' &&
+                         !hostname.startsWith('192.168.') &&
+                         !hostname.startsWith('10.') &&
+                         hostname !== '0.0.0.0'
   
-  return isProd && isNotLocalhost
+  // Also check the port - if running on common dev ports, disable
+  const port = window.location.port
+  const isNotDevPort = port !== '5173' && // Vite default
+                       port !== '3000' && // Common dev port
+                       port !== '8080' && // Another common dev port
+                       port !== '4173'    // Vite preview
+  
+  return isProd && isNotLocalhost && isNotDevPort
 }
 
 /**

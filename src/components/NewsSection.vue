@@ -6,7 +6,7 @@
       </h2>
       <div v-if="loading" class="grid md:grid-cols-3 gap-8">
         <div v-for="n in 3" :key="n" class="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
-          <div class="w-full h-48 bg-gray-200"></div>
+          <div class="w-full h-56 bg-gray-200"></div>
           <div class="p-6">
             <div class="h-4 w-1/3 bg-gray-200 mb-2 rounded"></div>
             <div class="h-6 w-2/3 bg-gray-200 mb-3 rounded"></div>
@@ -24,11 +24,16 @@
           :key="item.id"
           class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
         >
-          <img 
-            :src="item.image" 
-            :alt="item.title"
-            class="w-full h-48 object-cover"
-          />
+          <div class="w-full h-48 overflow-hidden flex items-center justify-center">
+            <img 
+              v-if="item.image && !item.imageError"
+              :src="item.image" 
+              :alt="item.title"
+              class="w-full h-full object-cover"
+              @error="handleImageError(item)"
+            />
+            <ImagePlaceholder v-else size="xlarge" />
+          </div>
           <div class="p-6">
             <p class="text-sm text-gray-500 mb-2">{{ item.date }}</p>
             <h3 class="text-xl font-semibold mb-3 text-gray-800">{{ item.title }}</h3>
@@ -50,11 +55,16 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import api from '../utils/axios'
+import ImagePlaceholder from './ImagePlaceholder.vue'
 
 const router = useRouter()
 const newsItems = ref([])
 const loading = ref(true)
 const error = ref(false)
+
+const handleImageError = (item) => {
+  item.imageError = true
+}
 
 const navigateToArticle = (articleId) => {
   router.push({
