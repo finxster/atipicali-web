@@ -1,16 +1,16 @@
 <template>
   <nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-4">
-      <div class="flex items-center justify-between">
-        <router-link to="/" class="flex items-center space-x-3">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center justify-between gap-3">
+        <router-link to="/" class="flex items-center space-x-2 flex-shrink-0">
           <img src="@/assets/logo.png" alt="Logo" class="w-10 h-10 object-contain bg-white" />
-          <span class="text-2xl font-bold text-atipicali-blue">{{ $t('navbar.title') }}</span>
+          <span class="hidden sm:block text-2xl font-bold text-atipicali-blue">{{ $t('navbar.title') }}</span>
         </router-link>
 
         <!-- Mobile Search Button (visible on small screens) -->
         <button
           @click="showMobileSearch = true"
-          class="md:hidden flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 rounded-full px-4 py-2 transition-colors"
+          class="md:hidden flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 rounded-full px-4 py-2 transition-colors flex-shrink-0"
         >
           <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -197,7 +197,7 @@
           </button>
         </div>
 
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-3 flex-shrink-0">
           <router-link to="/add-place" class="hidden sm:block bg-atipicali-green hover:opacity-90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
             {{ $t('navbar.createPlace') }}
           </router-link>
@@ -209,7 +209,7 @@
               <div class="w-8 h-8 rounded-full bg-atipicali-blue text-white flex items-center justify-center font-bold">
                 {{ avatarLetter }}
               </div>
-              <span class="font-semibold text-gray-700">{{ displayName }}</span>
+              <span class="hidden sm:inline font-semibold text-gray-700">{{ displayName }}</span>
               <button @click="handleLogout" class="ml-2 text-sm text-red-500 hover:underline">Logout</button>
             </div>
           </template>
@@ -217,7 +217,7 @@
             <button @click="showAuthModal = true; authModalMode = 'register'" class="hidden sm:block text-atipicali-blue hover:text-atipicali-blue-dark font-semibold">
               {{ $t('navbar.register') }}
             </button>
-            <button @click="showAuthModal = true; authModalMode = 'login'" class="btn-primary py-2 px-4">
+            <button @click="showAuthModal = true; authModalMode = 'login'" class="btn-primary py-2 px-4 whitespace-nowrap">
               {{ $t('navbar.login') }}
             </button>
           </template>
