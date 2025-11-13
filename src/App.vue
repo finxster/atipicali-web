@@ -2,6 +2,7 @@
   <div id="app" class="min-h-screen flex flex-col">
     <Navbar />
     <router-view />
+    <CookieBanner />
   </div>
 </template>
 
@@ -9,6 +10,7 @@
 import { watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import Navbar from './components/Navbar.vue'
+import CookieBanner from './components/CookieBanner.vue'
 
 const { t, locale } = useI18n()
 

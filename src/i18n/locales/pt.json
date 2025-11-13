@@ -438,5 +438,36 @@
       "title": "Entre em Contato Sobre Termos",
       "description": "Se você tiver alguma dúvida sobre estes Termos de Serviço, entre em contato conosco em:"
     }
+  },
+  "cookies": {
+    "title": "🍪 Oi! Vamos falar sobre cookies",
+    "description": "Usamos cookies pra melhorar sua experiência e entender como as pessoas usam o site. Sua escolha, sua privacidade!",
+    "learnMore": "Saiba mais",
+    "acceptAll": "Aceitar Tudo",
+    "necessaryOnly": "Só o Essencial",
+    "customize": "Deixa eu escolher",
+    "customizeTitle": "🍪 Escolha suas preferências de cookies",
+    "savePreferences": "Salvar Minhas Escolhas",
+    "necessary": "Cookies Essenciais 🔧",
+    "alwaysActive": "Sempre Ligado",
+    "necessaryDescription": "Esses mantêm o site funcionando - coisas como segurança, login e funções básicas. Não dá pra desligar, mas eles não te rastreiam!",
+    "analytics": "Cookies de Análise 📊",
+    "analyticsDescription": "Esses nos ajudam a ver quais páginas as pessoas visitam e quanto tempo ficam. É tudo anônimo - só queremos melhorar o site pra você!",
+    "settings": {
+      "title": "Configurações de Cookies",
+      "description": "Você pode gerenciar suas preferências de cookies aqui. Suas escolhas serão salvas e aplicadas imediatamente.",
+      "currentSettings": "Configurações Atuais:",
+      "necessaryCookies": "Cookies Essenciais",
+      "analyticsCookies": "Cookies de Análise",
+      "enabled": "Ativado",
+      "disabled": "Desativado",
+      "alwaysRequired": "Sempre necessário",
+      "managePreferences": "Gerenciar Preferências de Cookies",
+      "disableAnalytics": "Desativar Cookies de Análise",
+      "enableAnalytics": "Ativar Cookies de Análise",
+      "refreshNote": "💡 Mudanças nos cookies de análise exigem recarregar a página.",
+      "confirmDisable": "Tem certeza que deseja desativar os cookies de análise? Isso vai recarregar a página.",
+      "confirmEnable": "Ativar cookies de análise? Isso vai recarregar a página para inicializar o rastreamento."
+    }
   }
 }

@@ -3,6 +3,7 @@
  * 
  * This plugin configures GA4 for the application with the following features:
  * - Only tracks in production (localhost/development tracking is disabled)
+ * - Requires user consent (GDPR/privacy compliant)
  * - Automatic pageview tracking on route changes
  * - Custom event tracking support
  * - Environment-based configuration
@@ -14,8 +15,26 @@
 import VueGtag from 'vue-gtag-next'
 
 /**
+ * Check if user has given analytics consent
+ * 
+ * @returns {boolean} True if user has consented to analytics
+ */
+const hasUserConsent = () => {
+  try {
+    const consent = localStorage.getItem('atipicali_cookie_consent')
+    if (consent) {
+      const parsed = JSON.parse(consent)
+      return parsed.analytics === true
+    }
+  } catch (error) {
+    console.error('Failed to read cookie consent:', error)
+  }
+  return false
+}
+
+/**
  * Determines if analytics should be enabled
- * Analytics is only enabled in production environments
+ * Analytics is only enabled in production environments AND with user consent
  * 
  * @returns {boolean} True if analytics should be enabled
  */
@@ -60,12 +79,20 @@ export const setupAnalytics = (app, router) => {
     return
   }
 
-  const enabled = isProduction()
+  const isProd = isProduction()
+  const hasConsent = hasUserConsent()
+  
+  // Analytics is only enabled if BOTH conditions are met:
+  // 1. Running in production (not localhost)
+  // 2. User has given consent
+  const enabled = isProd && hasConsent
   
   // Log configuration status (only in development)
   if (import.meta.env.DEV) {
-    if (!enabled) {
+    if (!isProd) {
       console.log('📊 Google Analytics: Disabled (not in production environment)')
+    } else if (!hasConsent) {
+      console.log('📊 Google Analytics: Waiting for user consent')
     } else {
       console.log('📊 Google Analytics: Enabled')
     }

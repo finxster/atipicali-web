@@ -79,6 +79,11 @@
             </p>
           </section>
 
+          <!-- Cookie Settings Section -->
+          <section class="mb-8">
+            <CookieSettings />
+          </section>
+
           <!-- Contact Section -->
           <section class="border-t border-gray-200 pt-8 mt-8">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ $t('privacy.contact.title') }}</h2>
@@ -103,4 +108,5 @@
 
 <script setup>
 import Footer from '../components/Footer.vue'
+import CookieSettings from '../components/CookieSettings.vue'
 </script>

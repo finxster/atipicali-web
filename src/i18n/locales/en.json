@@ -437,5 +437,36 @@
       "title": "Contact Us About Terms",
       "description": "If you have any questions about these Terms of Service, please contact us at:"
     }
+  },
+  "cookies": {
+    "title": "🍪 Hey! Let's talk about cookies",
+    "description": "We use cookies to make your experience better and understand how people use our site. Your choice, your privacy!",
+    "learnMore": "Learn more",
+    "acceptAll": "Accept All",
+    "necessaryOnly": "Only Essential",
+    "customize": "Let me choose",
+    "customizeTitle": "🍪 Choose your cookie preferences",
+    "savePreferences": "Save My Choices",
+    "necessary": "Essential Cookies 🔧",
+    "alwaysActive": "Always On",
+    "necessaryDescription": "These keep the site working - things like security, login, and basic functions. We can't turn these off, but they don't track you!",
+    "analytics": "Analytics Cookies 📊",
+    "analyticsDescription": "These help us see which pages people visit and how long they stay. It's all anonymous - we just want to make the site better for you!",
+    "settings": {
+      "title": "Cookie Settings",
+      "description": "You can manage your cookie preferences here. Your choices will be saved and applied immediately.",
+      "currentSettings": "Current Settings:",
+      "necessaryCookies": "Necessary Cookies",
+      "analyticsCookies": "Analytics Cookies",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "alwaysRequired": "Always required",
+      "managePreferences": "Manage Cookie Preferences",
+      "disableAnalytics": "Disable Analytics Cookies",
+      "enableAnalytics": "Enable Analytics Cookies",
+      "refreshNote": "💡 Changes to analytics cookies will require a page refresh to take effect.",
+      "confirmDisable": "Are you sure you want to disable analytics cookies? This will reload the page.",
+      "confirmEnable": "Enable analytics cookies? This will reload the page to initialize tracking."
+    }
   }
 }
