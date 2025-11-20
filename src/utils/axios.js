@@ -11,13 +11,19 @@ const api = axios.create({
   }
 })
 
-// Request interceptor: attach JWT token if available
+// Request interceptor: attach JWT token and Accept-Language header
 api.interceptors.request.use(
   (config) => {
     const authStore = useAuthStore()
     if (authStore.token) {
       config.headers.Authorization = `Bearer ${authStore.token}`
     }
+    
+    // Add Accept-Language header based on current locale from localStorage
+    const locale = localStorage.getItem('atipicali_locale') || 'en'
+    const language = locale === 'pt' ? 'pt-br' : 'en'
+    config.headers['Accept-Language'] = language
+    
     return config
   },
   (error) => {
