@@ -46,7 +46,9 @@ export const placeAPI = {
   // Get all available service types
   getServiceTypes: () => api.get('/api/public/service-types'),
   // Submit a new place
-  submitPlace: (data) => api.post('/api/places', data)
+  submitPlace: (data) => api.post('/api/places', data),
+  // Submit a report for a place
+  submitPlaceReport: (placeId, data, language) => api.post(`/api/places/${placeId}/reports`, { ...data, language })
 }
 
 // Auth API methods

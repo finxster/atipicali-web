@@ -3,6 +3,7 @@ import Home from '../pages/Home.vue'
 import PlacePage from '../pages/PlacePage.vue'
 import AddPlace from '../pages/AddPlace.vue'
 import PlaceSubmitted from '../pages/PlaceSubmitted.vue'
+import ReportSubmitted from '../pages/ReportSubmitted.vue'
 import Login from '../pages/Login.vue'
 import Register from '../pages/Register.vue'
 import AuthRequired from '../pages/AuthRequired.vue'
@@ -35,6 +36,11 @@ const routes = [
     path: '/place-submitted/:id',
     name: 'PlaceSubmitted',
     component: PlaceSubmitted
+  },
+  {
+    path: '/report-submitted/:id',
+    name: 'ReportSubmitted',
+    component: ReportSubmitted
   },
   {
     path: '/login',

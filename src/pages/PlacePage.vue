@@ -450,6 +450,19 @@
                   </div>
                 </div>
               </section>
+
+              <!-- Report Section -->
+              <section class="bg-white border border-gray-200 rounded-lg p-4">
+                <button
+                  @click="showReportModal = true"
+                  class="w-full flex items-center justify-center gap-2 px-4 py-2.5 text-gray-700 hover:text-red-600 hover:bg-red-50 rounded-lg border border-gray-300 hover:border-red-300 transition-all group"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                  </svg>
+                  <span class="text-sm font-medium">{{ $t('placePage.reportIssue') }}</span>
+                </button>
+              </section>
             </div>
           </div>
 
@@ -468,6 +481,16 @@
         </div>
       </div>
     </div>
+    
+    <!-- Report Modal -->
+    <ReportPlaceModal
+      :is-open="showReportModal"
+      :place-id="placeId"
+      :place-name="place?.name || ''"
+      @close="showReportModal = false"
+      @success="onReportSuccess"
+    />
+    
     <Footer />
   </div>
 </template>
@@ -478,6 +501,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Footer from '../components/Footer.vue'
 import ImagePlaceholder from '../components/ImagePlaceholder.vue'
+import ReportPlaceModal from '../components/ReportPlaceModal.vue'
 import { placeAPI } from '../services/api'
 import { useAuthStore } from '../stores/auth'
 
@@ -500,6 +524,8 @@ const reviewForm = ref({
   rating: 0,
   comment: ''
 })
+
+const showReportModal = ref(false)
 
 const isAuthenticated = computed(() => authStore.isAuthenticated)
 
@@ -655,6 +681,11 @@ const redirectToAuth = () => {
     name: 'AuthRequired',
     query: { redirect: route.fullPath }
   })
+}
+
+const onReportSuccess = () => {
+  // Optionally show a success message or refresh data
+  console.log('Report submitted successfully')
 }
 
 onMounted(() => {
