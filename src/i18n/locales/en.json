@@ -183,7 +183,9 @@
         "addressRequired": "Address is required.",
         "invalidCoordinates": "Please select a valid address from suggestions so we can get coordinates.",
         "ratingInvalid": "Please provide a rating between 1 and 5.",
-        "general": "Failed to create place. Please try again later."
+        "general": "Failed to create place. Please try again later.",
+        "network": "Network error. Please check your connection and try again.",
+        "sessionExpired": "Your session has expired. Please log in again."
       }
     }
   },
@@ -235,6 +237,8 @@
     "loginForAddPlace": "To add a place, please log in first",
     "loginFriendly": "Join our community to help us build a better, more inclusive world for neurodivergent individuals",
     "registerFriendly": "Create an account to share places and help others find neurodivergent-friendly spaces",
+    "sessionExpired": "Your session has expired. Please log in again to continue.",
+    "unauthorized": "You are not authorized to perform this action. Please log in.",
     "errors": {
       "emailRequired": "Email is required",
       "emailInvalid": "Please enter a valid email",

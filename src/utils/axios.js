@@ -31,14 +31,24 @@ api.interceptors.request.use(
   }
 )
 
-// Response interceptor: handle 401 errors
+// Response interceptor: handle 401/403 errors
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response && error.response.status === 401) {
-      console.warn('Unauthorized request - clearing auth state')
+    // Handle authentication errors (401 Unauthorized or 403 Forbidden with expired token)
+    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+      console.warn('Authentication error - clearing auth state and redirecting to login')
       const authStore = useAuthStore()
       authStore.clearToken()
+      
+      // Store the current URL to redirect back after login
+      const currentPath = window.location.pathname + window.location.search
+      
+      // Only redirect if not already on auth pages
+      if (!currentPath.includes('/login') && !currentPath.includes('/register') && !currentPath.includes('/auth-required')) {
+        // Redirect to auth-required page with return URL
+        window.location.href = `/auth-required?redirect=${encodeURIComponent(currentPath)}`
+      }
     }
     return Promise.reject(error)
   }

@@ -183,7 +183,9 @@
         "addressRequired": "O endereço é obrigatório.",
         "invalidCoordinates": "Por favor selecione um endereço válido nas sugestões para obter as coordenadas.",
         "ratingInvalid": "Forneça uma classificação entre 1 e 5.",
-        "general": "Falha ao criar o lugar. Por favor, tente novamente mais tarde."
+        "general": "Falha ao criar o lugar. Por favor, tente novamente mais tarde.",
+        "network": "Erro de rede. Por favor, verifique sua conexão e tente novamente.",
+        "sessionExpired": "Sua sessão expirou. Por favor, faça login novamente."
       }
     }
   },
@@ -236,6 +238,8 @@
     "loginForAddPlace": "Para adicionar um lugar, faça login primeiro",
     "loginFriendly": "Junte-se à nossa comunidade para ajudar a criar um mundo melhor e mais inclusivo para neurodivergentes",
     "registerFriendly": "Crie uma conta para compartilhar lugares e ajudar outros a encontrar espaços amigáveis para neurodivergentes",
+    "sessionExpired": "Sua sessão expirou. Por favor, faça login novamente para continuar.",
+    "unauthorized": "Você não está autorizado a realizar esta ação. Por favor, faça login.",
     "errors": {
       "emailRequired": "E-mail é obrigatório",
       "emailInvalid": "Por favor, insira um e-mail válido",
