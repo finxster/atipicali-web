@@ -362,23 +362,34 @@
   },
   "about": {
     "title": "About AtipicALI",
-    "subtitle": "Building an inclusive community for neurodivergent individuals",
-    "mission": "Our Mission",
-    "missionDescription": "AtipicALI is dedicated to creating a trusted directory of neurodivergent-friendly places and services. We empower the neurodivergent community by connecting them with inclusive businesses, healthcare providers, and spaces that understand and support their unique needs.",
-    "vision": "Our Vision",
-    "visionDescription": "We envision a world where neurodivergent individuals can easily find and access safe, welcoming, and accommodating spaces. We believe that diversity in thinking and perception strengthens communities and drives innovation.",
-    "values": "Our Values",
-    "value1": {
-      "title": "Accessibility First",
-      "description": "We prioritize accessibility in everything we do, ensuring our platform and resources are available to everyone."
+    "subtitle": "More than a directory, a trusted \"right there\" for the neurodivergent community",
+    "hero": {
+      "title": "Our Story Begins with a \"What If...?\"",
+      "description": "We are Camila and Felipe, parents of a wonderfully neurodivergent child. On our journey, we found that one of the most challenging parts wasn't caring for our son, but finding: the right professional, the welcoming school, the adapted leisure space. The search was lonely, and online lists felt impersonal and cold.",
+      "realization": "That's when we realized the power of word-of-mouth within the neurodivergent community. When another parent says \"we went there, and it was good,\" that word is worth more than any advertisement. It's a recommendation filled with lived experience, empathy, and trust.",
+      "birth": "It was from this 'What if?' that <strong>AtipicALI</strong> <span class=\"text-atipicali-blue font-medium\">(pronounced: /ˌeɪˈtɪp.ɪ.kəl.i/ – like 'Atypically')</span> was born."
     },
-    "value2": {
-      "title": "Community-Driven",
-      "description": "We believe in the power of community feedback and collaboration to build better solutions for neurodivergent individuals."
+    "nameMeaning": {
+      "title": "The \"ALI\" That Changes Everything",
+      "description": "The name is no accident. It's the essence of who we want to be.",
+      "scene": "Picture this: you're lost, you ask for directions, and instead of giving complicated instructions, the person points and says: <strong>\"It's right there!\"</strong>. It's a clear, direct, and, above all, trustworthy indication.",
+      "conclusion": "<strong>AtipicALI</strong> is that spot on the map. It's the trusted \"right there\" for neurodivergent individuals and families to find the services and places that truly make a difference. It's where community recommendations become a safe guide for everyone."
     },
-    "value3": {
-      "title": "Authentic & Inclusive",
-      "description": "We celebrate neurodiversity as a natural and valuable part of human variation, promoting genuine inclusion."
+    "community": {
+      "title": "Building the Map Together",
+      "description": "We are not a startup with a mission crafted in a boardroom. We are a platform built by and for the community.",
+      "youAreProtagonist": "Here, you are the protagonist:",
+      "actions": {
+        "recommend": "You recommend the professional who understood your needs",
+        "share": "You share your experience at the establishment that was welcoming",
+        "help": "You help build a collective map of trust, where every review is a \"right there\" of hope for another family"
+      },
+      "ourRole": "Our job is to use our technical skills to organize and amplify this community's voice, ensuring the best recommendations – the ones that make a real difference – are easy to find."
+    },
+    "cta": {
+      "title": "Join Us",
+      "description": "This is not just our project. It is our contribution to a stronger, more united, and less lonely support network.",
+      "action": "Come point out and find the best \"right there\" spots with us."
     }
   },
   "contact": {

@@ -362,24 +362,35 @@
     "mapNotAvailable": "Mapa não está disponível para esta busca"
   },
   "about": {
-    "title": "Sobre AtipicALI",
-    "subtitle": "Construindo uma comunidade inclusiva para indivíduos neurodivergentes",
-    "mission": "Nossa Missão",
-    "missionDescription": "AtipicALI é dedicada a criar um diretório confiável de lugares e serviços amigáveis para neurodivergentes. Capacitamos a comunidade neurodivergente conectando-os com empresas inclusivas, provedores de saúde e espaços que compreendem e apoiam suas necessidades únicas.",
-    "vision": "Nossa Visão",
-    "visionDescription": "Visionamos um mundo onde indivíduos neurodivergentes possam encontrar e acessar facilmente espaços seguros, acolhedores e acomodadores. Acreditamos que a diversidade no pensamento e na percepção fortalece comunidades e impulsiona inovação.",
-    "values": "Nossos Valores",
-    "value1": {
-      "title": "Acessibilidade em Primeiro Lugar",
-      "description": "Priorizamos a acessibilidade em tudo o que fazemos, garantindo que nossa plataforma e recursos estejam disponíveis para todos."
+    "title": "Sobre a AtipicALI",
+    "subtitle": "Mais que um diretório, um \"ali\" de confiança para a comunidade neurodivergente",
+    "hero": {
+      "title": "A Nossa História Começa com um \"E Se...?\"",
+      "description": "Somos Camila e Felipe, pais de uma criança maravilhosamente atípica. Em nossa jornada, descobrimos que uma das partes mais desafiadoras não era cuidar do nosso filho, mas encontrar: o profissional ideal, a escola acolhedora, o espaço de lazer adaptado. A busca era solitária e as listas na internet, impessoais e frias.",
+      "realization": "Foi então que percebemos o poder das indicações dentro da comunidade neurodivergente. Quando outro pai ou mãe diz \"foi ali, e foi bom\", essa palavra vale mais que qualquer anúncio. É uma indicação que carrega experiência, empatia e confiança.",
+      "birth": "Foi desse \"E se?\" que nasceu a <strong>AtipicALI</strong> <span class=\"text-atipicali-blue font-medium\">(pronuncia-se: /aˈti.pi.kel.i/)</span>."
     },
-    "value2": {
-      "title": "Orientado pela Comunidade",
-      "description": "Acreditamos no poder do feedback da comunidade e da colaboração para construir melhores soluções para indivíduos neurodivergentes."
+    "nameMeaning": {
+      "title": "O \"Ali\" que Muda Tudo",
+      "description": "O nome não é por acaso. É a essência do que queremos ser.",
+      "scene": "Pense na cena: você está perdido, pergunta por uma direção e a pessoa, em vez de dar instruções complicadas, aponta e diz: <strong>\"É ali!\"</strong>. É uma indicação clara, direta e, acima de tudo, segura.",
+      "conclusion": "A <strong>AtipicALI</strong> é esse ponto no mapa. É o \"ali\" confiável para famílias e pessoas neurodivergentes encontrarem os serviços e locais que realmente fazem a diferença. É onde a indicação da comunidade vira um guia seguro para todos."
     },
-    "value3": {
-      "title": "Autêntico e Inclusivo",
-      "description": "Celebramos a neurodiversidade como uma parte natural e valiosa da variação humana, promovendo inclusão genuína."
+    "community": {
+      "title": "Construindo o Mapa Juntos",
+      "description": "Não somos uma startup com uma missão vinda de um gabinete. Somos uma plataforma construída pela e para a comunidade.",
+      "youAreProtagonist": "Aqui, o protagonista é você:",
+      "actions": {
+        "recommend": "Você indica o profissional que entendeu suas necessidades",
+        "share": "Você compartilha a experiência no estabelecimento que foi acolhedor", 
+        "help": "Você ajuda a construir um mapa coletivo de confiança, onde cada avaliação é um \"ali\" de esperança para outra família"
+      },
+      "ourRole": "Nosso trabalho é usar nosso conhecimento técnico para organizar e dar voz a essa comunidade, garantindo que as melhores indicações – aquelas que fazem a diferença na vida real – sejam facilmente encontradas."
+    },
+    "cta": {
+      "title": "Junte-se a Nós",
+      "description": "Este não é apenas o nosso projeto. É a nossa contribuição para uma rede de apoio mais forte, mais unida e menos solitária.",
+      "action": "Venha apontar e encontrar os melhores \"ali\"s conosco."
     }
   },
   "contact": {

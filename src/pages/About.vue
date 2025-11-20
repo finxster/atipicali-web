@@ -11,36 +11,64 @@
     <!-- Main Content -->
     <div class="min-h-screen bg-gray-50">
       <div class="container mx-auto px-4 py-16">
-        <!-- Mission Section -->
-        <div class="mb-16">
-          <h2 class="text-3xl font-bold text-gray-800 mb-8">{{ $t('about.mission') }}</h2>
-          <p class="text-lg text-gray-600 leading-relaxed max-w-3xl">
-            {{ $t('about.missionDescription') }}
-          </p>
-        </div>
-
-        <!-- Vision Section -->
-        <div class="mb-16">
-          <h2 class="text-3xl font-bold text-gray-800 mb-8">{{ $t('about.vision') }}</h2>
-          <p class="text-lg text-gray-600 leading-relaxed max-w-3xl">
-            {{ $t('about.visionDescription') }}
-          </p>
-        </div>
-
-        <!-- Values Section -->
-        <div class="mb-16">
-          <h2 class="text-3xl font-bold text-gray-800 mb-8">{{ $t('about.values') }}</h2>
-          <div class="grid md:grid-cols-3 gap-8">
-            <div
-              v-for="(value, index) in values"
-              :key="index"
-              class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow"
-            >
-              <div class="text-4xl mb-4">{{ value.icon }}</div>
-              <h3 class="text-xl font-bold text-gray-800 mb-3">{{ $t(`about.value${index + 1}.title`) }}</h3>
-              <p class="text-gray-600">{{ $t(`about.value${index + 1}.description`) }}</p>
+        <!-- Hero Story -->
+        <div class="mb-16 max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-gray-800 mb-8">{{ $t('about.hero.title') }}</h2>
+          <div class="space-y-6 text-lg text-gray-600 leading-relaxed">
+            <p>{{ $t('about.hero.description') }}</p>
+            
+            <!-- Email Contacts - Added here -->
+            <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-atipicali-blue">
+              <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="mailto:camila@atipicali.com" class="text-atipicali-blue hover:underline font-medium">Camila (camila@atipicali.com)</a>
+                <a href="mailto:felipe@atipicali.com" class="text-atipicali-blue hover:underline font-medium">Felipe (felipe@atipicali.com)</a>
+              </div>
             </div>
+            
+            <p>{{ $t('about.hero.realization') }}</p>
+            <p v-html="$t('about.hero.birth')"></p>
           </div>
+        </div>
+
+        <!-- Name Meaning -->
+        <div class="mb-16 max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-gray-800 mb-8">{{ $t('about.nameMeaning.title') }}</h2>
+          <div class="space-y-6 text-lg text-gray-600 leading-relaxed">
+            <p>{{ $t('about.nameMeaning.description') }}</p>
+            <p class="bg-blue-50 p-6 rounded-lg border-l-4 border-atipicali-blue" v-html="$t('about.nameMeaning.scene')"></p>
+            <p v-html="$t('about.nameMeaning.conclusion')"></p>
+          </div>
+        </div>
+
+        <!-- Community -->
+        <div class="mb-16 max-w-4xl mx-auto">
+          <h2 class="text-3xl font-bold text-gray-800 mb-8">{{ $t('about.community.title') }}</h2>
+          <div class="space-y-6 text-lg text-gray-600 leading-relaxed">
+            <p>{{ $t('about.community.description') }}</p>
+            <p class="font-semibold text-gray-800">{{ $t('about.community.youAreProtagonist') }}</p>
+            <ul class="space-y-4 ml-6">
+              <li class="flex items-start">
+                <span class="text-atipicali-blue mr-3 mt-1">•</span>
+                <span>{{ $t('about.community.actions.recommend') }}</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-atipicali-blue mr-3 mt-1">•</span>
+                <span>{{ $t('about.community.actions.share') }}</span>
+              </li>
+              <li class="flex items-start">
+                <span class="text-atipicali-blue mr-3 mt-1">•</span>
+                <span>{{ $t('about.community.actions.help') }}</span>
+              </li>
+            </ul>
+            <p class="font-medium text-gray-700">{{ $t('about.community.ourRole') }}</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="max-w-4xl mx-auto text-center bg-white p-8 rounded-lg shadow-md">
+          <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ $t('about.cta.title') }}</h2>
+          <p class="text-lg text-gray-600 mb-6">{{ $t('about.cta.description') }}</p>
+          <p class="text-xl font-semibold text-atipicali-blue">{{ $t('about.cta.action') }}</p>
         </div>
       </div>
     </div>
@@ -54,10 +82,4 @@
 <script setup>
 import CTASection from '../components/CTASection.vue'
 import Footer from '../components/Footer.vue'
-
-const values = [
-  { icon: '♿' },
-  { icon: '🤝' },
-  { icon: '🌍' }
-]
 </script>
